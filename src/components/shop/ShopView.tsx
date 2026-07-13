@@ -2,7 +2,6 @@ import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { SlidersHorizontal } from "lucide-react";
 import { fetchProducts, fetchCategories, type ProductFilters } from "@/lib/catalog";
-import { finalPrice } from "@/lib/types";
 import { formatINR } from "@/lib/format";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -169,5 +168,3 @@ export function ShopView({
     </div>
   );
 }
-
-export { finalPrice };

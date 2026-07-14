@@ -161,7 +161,17 @@ export function ShopView({
               {Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="aspect-[3/4] rounded-2xl" />)}
             </div>
           ) : (
-            <ProductGrid products={data ?? []} />
+           <>
+  <h1 style={{ color: "red", fontSize: "30px" }}>
+    PRODUCTS: {data?.length}
+  </h1>
+
+  <pre style={{ color: "white", maxHeight: 300, overflow: "auto" }}>
+    {JSON.stringify(data, null, 2)}
+  </pre>
+
+  <ProductGrid products={data ?? []} />
+</>
           )}
         </div>
       </div>

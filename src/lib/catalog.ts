@@ -53,9 +53,18 @@ let query = supabase
   }
 
   const { data, error } = await query;
-  if (error) throw error;
+
+console.log("Products returned:", data);
+console.log("Supabase error:", error);
+  if (error) {
+  console.error(error);
+  alert(error.message);
+  throw error;
+}
   let rows = (data ?? []) as unknown as (Product & { categories?: { slug: string } })[];
   if (filters.categorySlug) rows = rows.filter((p) => p.categories?.slug === filters.categorySlug);
+  console.log("Rows after filtering:", rows);
+alert(`Rows: ${rows.length}`);
   return rows;
 }
 

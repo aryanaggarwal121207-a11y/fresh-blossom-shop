@@ -22,7 +22,10 @@ export interface ProductFilters {
 }
 
 export async function fetchProducts(filters: ProductFilters = {}): Promise<Product[]> {
-  let query = supabase.from("products").select("*, categories(name, slug)").eq("is_active", true);
+let query = supabase
+  .from("products")
+  .select("*")
+  .eq("is_active", true);
 
   if (filters.featured) query = query.eq("is_featured", true);
   if (filters.bestSeller) query = query.eq("is_best_seller", true);

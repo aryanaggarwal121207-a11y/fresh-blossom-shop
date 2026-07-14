@@ -3,7 +3,9 @@ import type { Category, Product } from "@/lib/types";
 
 export async function fetchCategories(): Promise<Category[]> {
   const { data, error } = await supabase.from("categories").select("*").order("name");
-  if (error) throw error;
+  console.log("Products data:", data);
+console.log("Products error:", error);
+if (error) throw error;
   return data ?? [];
 }
 

@@ -3,9 +3,6 @@ import type { Category, Product } from "@/lib/types";
 
 export async function fetchCategories(): Promise<Category[]> {
   const { data, error } = await supabase.from("categories").select("*").order("name");
-  console.log("Products data:", data);
-console.log("Products error:", error);
-if (error) throw error;
   return data ?? [];
 }
 
@@ -56,15 +53,9 @@ let query = supabase
 
 console.log("Products returned:", data);
 console.log("Supabase error:", error);
-  if (error) {
-  console.error(error);
-  alert(error.message);
-  throw error;
-}
+  if (error) throw error;
   let rows = (data ?? []) as unknown as (Product & { categories?: { slug: string } })[];
   if (filters.categorySlug) rows = rows.filter((p) => p.categories?.slug === filters.categorySlug);
-  console.log("Rows after filtering:", rows);
-alert(`Rows: ${rows.length}`);
   return rows;
 }
 

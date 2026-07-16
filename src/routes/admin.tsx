@@ -17,7 +17,7 @@ import type { Order, Product } from "@/lib/types";
 
 export const Route = createFileRoute("/admin")({
   component: () => <RequireAuth admin><Admin /></RequireAuth>,
-  head: () => ({ meta: [{ title: "Admin — STfresh" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin — Daksherb" }, { name: "robots", content: "noindex" }] }),
 });
 
 const ORDER_STATUSES = ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled", "returned"];

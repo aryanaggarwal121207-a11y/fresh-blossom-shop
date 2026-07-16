@@ -84,20 +84,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "STfresh — Natural Skincare | Rose, Aloe Vera & Papaya" },
-      {
-        name: "description",
-        content:
-          "Shop STfresh natural skincare — rose face wash, aloe vera gel and papaya gel. Premium plant-powered products for healthy, glowing skin. Free shipping over ₹499.",
-      },
-      { name: "author", content: "STfresh" },
-      { property: "og:title", content: "STfresh — Natural Skincare" },
-      {
-        property: "og:description",
-        content: "Premium plant-powered skincare crafted with rose, aloe vera and papaya.",
-      },
-      { property: "og:type", content: "website" },
-      { property: "og:site_name", content: "STfresh" },
+{ title: "Daks Herb — Natural Skincare | Herbal Skincare for Healthy Skin" },
+{
+  name: "description",
+  content:
+    "Discover Daks Herb's premium herbal skincare collection including Aloe Vera Gel, Papaya Gel and Rose Face Wash. Naturally crafted for healthy, glowing skin.",
+},
+{ name: "author", content: "Daks Herb" },
+{ property: "og:title", content: "Daks Herb — Natural Skincare" },
+{
+  property: "og:description",
+  content:
+    "Premium herbal skincare powered by nature. Aloe Vera, Rose and Papaya products for everyday skin care.",
+},
+{ property: "og:site_name", content: "Daks Herb" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [

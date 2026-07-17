@@ -83,7 +83,6 @@ export function ProductImagesDialog({
   >
     Choose Images
 <input
- <input
   type="file"
   multiple
   accept="image/*"

@@ -20,15 +20,21 @@ export function ProductImagesDialog({
   for (const file of files) {
     const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
 
-    // Upload image to Storage
-    const { error } = await supabase.storage
+    const { data, error } = await supabase.storage
       .from("product-images")
       .upload(fileName, file);
 
+    console.log("Upload result:", data);
+    console.log("Upload error:", error);
+
     if (error) {
       toast.error(error.message);
-      continue;
+      return;
     }
+
+    toast.success("One image uploaded");
+  }
+};
 
     // Get public URL
     const { data } = supabase.storage

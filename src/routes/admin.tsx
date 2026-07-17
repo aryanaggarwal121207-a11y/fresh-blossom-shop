@@ -132,8 +132,6 @@ function Admin() {
     </SelectContent>
   </Select>
 </div>
-                  </div>
-                </div>
               ))}
             </div>
           </TabsContent>

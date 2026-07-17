@@ -1,5 +1,5 @@
 import { OrderDetailsDialog } from "@/components/admin/OrderDetailsDialog";
-
+import { ProductImagesDialog } from "@/components/admin/ProductImagesDialog";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";

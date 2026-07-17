@@ -20,19 +20,36 @@ export function ProductImagesDialog({
   for (const file of files) {
     const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
 
-    const { data, error } = await supabase.storage
+    const { data: uploadData, error } = await supabase.storage
       .from("product-images")
       .upload(fileName, file);
 
-    console.log("Upload result:", data);
+    console.log("Upload result:", uploadData);
     console.log("Upload error:", error);
 
     if (error) {
       toast.error(error.message);
-      return;
+      continue;
+    }
+
+    const { data: publicUrlData } = supabase.storage
+      .from("product-images")
+      .getPublicUrl(fileName);
+
+    const { error: dbError } = await supabase
+      .from("product_images")
+      .insert({
+        product_id: product.id,
+        image_url: publicUrlData.publicUrl,
+      });
+
+    if (dbError) {
+      toast.error(dbError.message);
+      continue;
     }
   }
-    toast.success("One image uploaded");
+
+  toast.success("Images uploaded successfully");
 };
 
     // Get public URL

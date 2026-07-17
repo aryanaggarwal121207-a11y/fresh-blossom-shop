@@ -31,9 +31,8 @@ export function ProductImagesDialog({
       toast.error(error.message);
       return;
     }
-
-    toast.success("One image uploaded");
   }
+    toast.success("One image uploaded");
 };
 
     // Get public URL

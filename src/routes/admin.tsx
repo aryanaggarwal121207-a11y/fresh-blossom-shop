@@ -145,13 +145,14 @@ function Admin() {
 function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () => void }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
-    name: product?.name ?? "",
-    slug: product?.slug ?? "",
-    price: product?.price?.toString() ?? "",
-    discount_percent: product?.discount_percent?.toString() ?? "0",
-    stock: product?.stock?.toString() ?? "0",
-    description: product?.description ?? "",
-  });
+  name: product?.name ?? "",
+  slug: product?.slug ?? "",
+  image_url: product?.image_url ?? "",
+  price: product?.price?.toString() ?? "",
+  discount_percent: product?.discount_percent?.toString() ?? "0",
+  stock: product?.stock?.toString() ?? "0",
+  description: product?.description ?? "",
+});
 
   const save = async () => {
     const payload = {

@@ -1,127 +1,102 @@
-<DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
-  <DialogHeader>
-    <DialogTitle>{order.order_number}</DialogTitle>
-  </DialogHeader>
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { formatINR } from "@/lib/format";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { Order } from "@/lib/types";
 
-  <div className="grid gap-6 lg:grid-cols-2">
+export function OrderDetailsDialog({ order }: { order: Order }) {
+  const [items, setItems] = useState<any[]>([]);
 
-    {/* Shipping Address */}
-    <div className="rounded-xl border p-4">
-      <h3 className="mb-3 text-lg font-semibold">
-        Shipping Address
-      </h3>
+  const address =
+    typeof order.shipping_address === "string"
+      ? JSON.parse(order.shipping_address)
+      : order.shipping_address;
 
-      <div className="space-y-1 text-sm">
-        <p><strong>Name:</strong> {address?.name || "-"}</p>
-        <p><strong>Phone:</strong> {address?.phone || "-"}</p>
-        <p><strong>Address:</strong> {address?.line1 || "-"}</p>
+  useEffect(() => {
+    supabase
+      .from("order_items")
+      .select("*")
+      .eq("order_id", order.id)
+      .then(({ data }) => {
+        setItems(data ?? []);
+      });
+  }, [order.id]);
 
-        {address?.line2 && <p>{address.line2}</p>}
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="sm">
+          View Details
+        </Button>
+      </DialogTrigger>
 
-        <p>
-          {address?.city || "-"}, {address?.state || "-"}
-        </p>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{order.order_number}</DialogTitle>
+        </DialogHeader>
 
-        <p>
-          {address?.postalCode || address?.pincode || "-"}
-        </p>
+        <div className="mb-6 rounded-lg border p-4">
+          <h3 className="mb-3 text-lg font-semibold">
+            Shipping Address
+          </h3>
 
-        <p>{address?.country || "India"}</p>
-      </div>
-    </div>
+          <div className="space-y-1 text-sm">
+            <p><strong>Name:</strong> {address?.name || "-"}</p>
+            <p><strong>Phone:</strong> {address?.phone || "-"}</p>
+            <p><strong>Address:</strong> {address?.line1 || "-"}</p>
 
-    {/* Payment */}
-    <div className="rounded-xl border p-4">
-      <h3 className="mb-3 text-lg font-semibold">
-        Payment Details
-      </h3>
+            {address?.line2 && <p>{address.line2}</p>}
 
-      <div className="space-y-2 text-sm">
-        <p><strong>Payment Method:</strong> {order.payment_method}</p>
-        <p><strong>Payment Status:</strong> {order.payment_status}</p>
-        <p><strong>Order Status:</strong> {order.status}</p>
-        <p><strong>Delivery:</strong> {order.delivery_option}</p>
-      </div>
-    </div>
-
-  </div>
-
-  {/* Products */}
-  <div className="mt-6">
-    <h3 className="mb-3 text-lg font-semibold">
-      Ordered Products
-    </h3>
-
-    <div className="space-y-3">
-      {items.map((item) => (
-        <div
-          key={item.id}
-          className="flex items-center justify-between rounded-xl border p-4"
-        >
-          <div className="flex items-center gap-4">
-
-            <img
-              src={item.image_url}
-              alt={item.product_name}
-              className="h-20 w-20 rounded-lg object-cover"
-            />
-
-            <div>
-              <p className="font-semibold">
-                {item.product_name}
-              </p>
-
-              <p className="text-sm text-muted-foreground">
-                Quantity: {item.quantity}
-              </p>
-
-              <p className="text-sm text-muted-foreground">
-                Unit Price: {formatINR(Number(item.unit_price))}
-              </p>
-            </div>
-
-          </div>
-
-          <div className="text-right">
-            <p className="font-semibold">
-              {formatINR(
-                Number(item.unit_price) * Number(item.quantity)
-              )}
+            <p>
+              {address?.city || "-"}, {address?.state || "-"}
             </p>
+
+            <p>
+              {address?.postalCode || address?.pincode || "-"}
+            </p>
+
+            <p>{address?.country || "India"}</p>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
 
-  {/* Summary */}
-  <div className="mt-6 rounded-xl border p-4">
-    <h3 className="mb-3 text-lg font-semibold">
-      Order Summary
-    </h3>
+        <div className="space-y-3">
+          {items.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between border rounded-lg p-3"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={item.image_url}
+                  alt={item.product_name}
+                  className="w-16 h-16 rounded-lg object-cover"
+                />
 
-    <div className="space-y-2">
+                <div>
+                  <p className="font-medium">
+                    {item.product_name}
+                  </p>
 
-      <div className="flex justify-between">
-        <span>Subtotal</span>
-        <span>{formatINR(Number(order.subtotal))}</span>
-      </div>
+                  <p className="text-sm text-muted-foreground">
+                    Qty: {item.quantity}
+                  </p>
+                </div>
+              </div>
 
-      <div className="flex justify-between">
-        <span>Shipping</span>
-        <span>{formatINR(Number(order.shipping_fee))}</span>
-      </div>
-
-      <div className="flex justify-between">
-        <span>Discount</span>
-        <span>-{formatINR(Number(order.discount))}</span>
-      </div>
-
-      <div className="flex justify-between border-t pt-3 text-lg font-bold">
-        <span>Total</span>
-        <span>{formatINR(Number(order.total))}</span>
-      </div>
-
-    </div>
-  </div>
-</DialogContent>
+              <div className="text-right">
+                <p>{formatINR(Number(item.unit_price))}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

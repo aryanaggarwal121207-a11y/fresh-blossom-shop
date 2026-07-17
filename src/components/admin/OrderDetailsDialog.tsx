@@ -13,6 +13,10 @@ import type { Order } from "@/lib/types";
 
 export function OrderDetailsDialog({ order }: { order: Order }) {
   const [items, setItems] = useState<any[]>([]);
+  const address =
+  typeof order.shipping_address === "string"
+    ? JSON.parse(order.shipping_address)
+    : order.shipping_address;
 
   useEffect(() => {
     supabase

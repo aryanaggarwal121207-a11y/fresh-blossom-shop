@@ -9,7 +9,7 @@ import {
 import type { Product } from "@/lib/types";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type ProductImagesDialogProps = {
   product: Product;
@@ -60,9 +60,27 @@ const [loading, setLoading] = useState(false);
       }
     }
 
+    await fetchImages();
     toast.success("Images uploaded successfully");
   };
+const fetchImages = async () => {
+  setLoading(true);
 
+  const { data, error } = await supabase
+    .from("product_images")
+    .select("id, image_url")
+    .eq("product_id", product.id)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    toast.error(error.message);
+  } else {
+    setImages(data ?? []);
+  }
+
+  setLoading(false);
+};
+  
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -91,9 +109,28 @@ const [loading, setLoading] = useState(false);
             />
           </div>
 
-          <div className="rounded-lg border p-8 text-center text-muted-foreground">
-            Images will appear here after we add the gallery.
-          </div>
+         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+  {loading && <p>Loading...</p>}
+
+  {!loading && images.length === 0 && (
+    <div className="col-span-full rounded-lg border p-8 text-center text-muted-foreground">
+      No images uploaded yet.
+    </div>
+  )}
+
+  {images.map((image) => (
+    <div
+      key={image.id}
+      className="overflow-hidden rounded-lg border"
+    >
+      <img
+        src={image.image_url}
+        alt="Product"
+        className="w-full h-40 object-cover"
+      />
+    </div>
+  ))}
+</div>
         </div>
       </DialogContent>
     </Dialog>

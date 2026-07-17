@@ -154,7 +154,31 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   description: product?.description ?? "",
 });
 
-  const save = async () => {
+  const save = async () => 
+    const uploadImage = async (file: File) => {
+  const fileName = `${Date.now()}-${file.name}`;
+
+  const { error } = await supabase.storage
+    .from("gallery")
+    .upload(fileName, file);
+
+  if (error) {
+    toast.error(error.message);
+    return;
+  }
+
+  const { data } = supabase.storage
+    .from("gallery")
+    .getPublicUrl(fileName);
+
+  setForm((prev) => ({
+    ...prev,
+    image_url: data.publicUrl,
+  }));
+
+  toast.success("Image uploaded");
+};
+  {
     const payload = {
       name: form.name,
       slug: form.slug || form.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),

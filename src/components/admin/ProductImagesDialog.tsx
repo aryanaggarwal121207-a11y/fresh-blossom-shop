@@ -10,87 +10,51 @@ import type { Product } from "@/lib/types";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
+type ProductImagesDialogProps = {
+  product: Product;
+};
+
 export function ProductImagesDialog({
   product,
-}: {
-  product: Product;
-}) {
-
+}: ProductImagesDialogProps) {
   const uploadImages = async (files: File[]) => {
-  for (const file of files) {
-    const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
+    for (const file of files) {
+      const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
 
-    const { data: uploadData, error } = await supabase.storage
-      .from("product-images")
-      .upload(fileName, file);
+      // Upload image to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from("product-images")
+        .upload(fileName, file);
 
-    console.log("Upload result:", uploadData);
-    console.log("Upload error:", error);
+      if (uploadError) {
+        console.error(uploadError);
+        toast.error(uploadError.message);
+        continue;
+      }
 
-    if (error) {
-      toast.error(error.message);
-      continue;
+      // Get public URL
+      const { data } = supabase.storage
+        .from("product-images")
+        .getPublicUrl(fileName);
+
+      // Save image URL in database
+      const { error: dbError } = await supabase
+        .from("product_images")
+        .insert({
+          product_id: product.id,
+          image_url: data.publicUrl,
+        });
+
+      if (dbError) {
+        console.error(dbError);
+        toast.error(dbError.message);
+        continue;
+      }
     }
 
-    const { data: publicUrlData } = supabase.storage
-      .from("product-images")
-      .getPublicUrl(fileName);
+    toast.success("Images uploaded successfully");
+  };
 
-    const { error: dbError } = await supabase
-      .from("product_images")
-      .insert({
-        product_id: product.id,
-        image_url: publicUrlData.publicUrl,
-      });
-
-    if (dbError) {
-      toast.error(dbError.message);
-      continue;
-    }
-  }
-
-  toast.success("Images uploaded successfully");
-};
-
-    // Get public URL
-    const { data } = supabase.storage
-      const uploadImages = async (files: File[]) => {
-  for (const file of files) {
-    const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
-
-    // Upload to Storage
-    const { error } = await supabase.storage
-      .from("product-images")
-      .upload(fileName, file);
-
-    if (error) {
-      console.error(error);
-      toast.error(error.message);
-      continue;
-    }
-
-    // Get public URL
-    const { data } = supabase.storage
-      .from("product-images")
-      .getPublicUrl(fileName);
-
-    // Save URL in database
-    const { error: dbError } = await supabase
-      .from("product_images")
-      .insert({
-        product_id: product.id,
-        image_url: data.publicUrl,
-      });
-
-    if (dbError) {
-      console.error(dbError);
-      toast.error(dbError.message);
-      continue;
-    }
-  }
-
-  toast.success("Images uploaded successfully");
-};
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -101,46 +65,28 @@ export function ProductImagesDialog({
 
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>
-  TEST 123 - {product.name}
-</DialogTitle>
+          <DialogTitle>Images - {product.name}</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4">
-  <div className="space-y-3">
-    <label
-      style={{
-        display: "inline-block",
-        padding: "10px 20px",
-        background: "#2563eb",
-        color: "white",
-        borderRadius: "8px",
-        cursor: "pointer",
-      }}
-    >
-      Choose Images
+        <div className="space-y-6">
+          <div>
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={(e) => {
+                const files = e.target.files;
+                if (!files) return;
 
-      <input
-        type="file"
-        multiple
-        accept="image/*"
-        style={{ border: "1px solid black", padding: "10px" }}
-        onChange={(e) => {
-          const files = e.target.files;
-          if (!files) return;
+                uploadImages(Array.from(files));
+              }}
+            />
+          </div>
 
-          alert(`Selected ${files.length} files`);
-
-          uploadImages(Array.from(files));
-        }}
-      />
-    </label>
-  </div>
-
-  <div className="rounded-lg border p-8 text-center text-muted-foreground">
-    No images uploaded yet.
-  </div>
-</div>
+          <div className="rounded-lg border p-8 text-center text-muted-foreground">
+            Images will appear here after we add the gallery.
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

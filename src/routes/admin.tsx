@@ -159,7 +159,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   const fileName = `${Date.now()}-${file.name}`;
 
   const { error } = await supabase.storage
-    .from("gallery")
+    .from("product-images")
     .upload(fileName, file);
 
   if (error) {
@@ -168,7 +168,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   }
 
   const { data } = supabase.storage
-    .from("gallery")
+   .from("product-images")
     .getPublicUrl(fileName);
 
   setForm((prev) => ({

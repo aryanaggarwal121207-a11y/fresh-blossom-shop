@@ -41,6 +41,29 @@ export function OrderDetailsDialog({ order }: { order: Order }) {
           <DialogTitle>{order.order_number}</DialogTitle>
         </DialogHeader>
 
+        <div className="mb-6 rounded-lg border p-4">
+  <h3 className="mb-3 text-lg font-semibold">
+    Shipping Address
+  </h3>
+
+  <div className="space-y-1 text-sm">
+    <p><strong>Name:</strong> {address?.name || "-"}</p>
+    <p><strong>Phone:</strong> {address?.phone || "-"}</p>
+    <p><strong>Address:</strong> {address?.line1 || "-"}</p>
+
+    {address?.line2 && <p>{address.line2}</p>}
+
+    <p>
+      {address?.city || "-"}, {address?.state || "-"}
+    </p>
+
+    <p>
+      {address?.postalCode || address?.pincode || "-"}
+    </p>
+
+    <p>{address?.country || "India"}</p>
+  </div>
+</div>
         <div className="space-y-3">
   {items.map((item) => (
     <div

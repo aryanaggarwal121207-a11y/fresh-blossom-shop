@@ -29,8 +29,13 @@ export function ProductImagesDialog({
         </DialogHeader>
 
         <div className="space-y-4">
-          <Button>Upload Images</Button>
-
+          <div className="space-y-3">
+  <input
+    type="file"
+    multiple
+    accept="image/*"
+  />
+</div>
           <div className="rounded-lg border p-8 text-center text-muted-foreground">
             No images uploaded yet.
           </div>

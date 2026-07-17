@@ -54,6 +54,23 @@ export function ProductImagesDialog({
 
     // Get public URL
     const { data } = supabase.storage
+      const uploadImages = async (files: File[]) => {
+  for (const file of files) {
+    const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
+
+    // Upload to Storage
+    const { error } = await supabase.storage
+      .from("product-images")
+      .upload(fileName, file);
+
+    if (error) {
+      console.error(error);
+      toast.error(error.message);
+      continue;
+    }
+
+    // Get public URL
+    const { data } = supabase.storage
       .from("product-images")
       .getPublicUrl(fileName);
 
@@ -66,6 +83,7 @@ export function ProductImagesDialog({
       });
 
     if (dbError) {
+      console.error(dbError);
       toast.error(dbError.message);
       continue;
     }
@@ -73,7 +91,6 @@ export function ProductImagesDialog({
 
   toast.success("Images uploaded successfully");
 };
-
   return (
     <Dialog>
       <DialogTrigger asChild>

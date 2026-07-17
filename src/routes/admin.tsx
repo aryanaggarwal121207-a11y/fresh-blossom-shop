@@ -70,10 +70,24 @@ function Admin() {
               {products.map((p) => (
                 <div key={p.id} className="flex items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-0">
                   <div className="min-w-0"><p className="truncate font-medium">{p.name}</p><p className="text-sm text-muted-foreground">{formatINR(Number(p.price))} · Stock: {p.stock}</p></div>
-                  <div className="flex items-center gap-2">
-                    <ProductDialog product={p} onSaved={loadProducts} />
-                    <Button variant="ghost" size="sm" className="text-destructive" onClick={async () => { await supabase.from("products").delete().eq("id", p.id); toast.success("Deleted"); loadProducts(); }}>Delete</Button>
-                  </div>
+<div className="flex items-center gap-2">
+  <ProductDialog product={p} onSaved={loadProducts} />
+
+  <ProductImagesDialog product={p} />
+
+  <Button
+    variant="ghost"
+    size="sm"
+    className="text-destructive"
+    onClick={async () => {
+      await supabase.from("products").delete().eq("id", p.id);
+      toast.success("Deleted");
+      loadProducts();
+    }}
+  >
+    Delete
+  </Button>
+</div>
                 </div>
               ))}
             </div>

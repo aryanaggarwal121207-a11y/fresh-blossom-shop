@@ -50,13 +50,24 @@ export function ProductImagesDialog({
     }}
   >
     Choose Images
-    <input
-      type="file"
-      multiple
-      accept="image/*"
-      style={{ display: "none" }}
-      onChange={() => alert("Files selected")}
-    />
+   <input
+  type="file"
+  multiple
+  accept="image/*"
+  style={{ border: "1px solid black", padding: "10px" }}
+  onChange={(e) => {
+    alert("Working!");
+
+    const files = e.target.files;
+    if (!files) return;
+
+    console.log(files.length);
+
+    Array.from(files).forEach((file) => {
+      console.log(file.name);
+    });
+  }}
+/>
   </label>
 </div>
 </div>

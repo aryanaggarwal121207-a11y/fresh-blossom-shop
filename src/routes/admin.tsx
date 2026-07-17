@@ -182,6 +182,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
     const payload = {
       name: form.name,
       slug: form.slug || form.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      image_url: form.image_url,
       price: Number(form.price),
       discount_percent: Number(form.discount_percent),
       stock: Number(form.stock),

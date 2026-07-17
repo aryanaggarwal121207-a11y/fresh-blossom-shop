@@ -156,6 +156,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
 
 
     const uploadImage = async (file: File) => {
+      console.log("uploadImage started");
   const fileName = `${Date.now()}-${file.name}`;
 
   const { error } = await supabase.storage
@@ -224,13 +225,18 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
 <div className="space-y-1.5">
   <Label>Product Image</Label>
   <Input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (file) uploadImage(file);
-    }}
-  />
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    const file = e.target.files?.[0];
+    console.log("Selected file:", file);
+
+    if (file) {
+      alert("Calling uploadImage");
+      uploadImage(file);
+    }
+  }}
+/>
 </div>
 
 <Button onClick={save}>Save</Button>

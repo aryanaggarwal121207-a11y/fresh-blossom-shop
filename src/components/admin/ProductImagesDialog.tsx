@@ -7,6 +7,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { Product } from "@/lib/types";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 export function ProductImagesDialog({
   product,
@@ -15,10 +17,40 @@ export function ProductImagesDialog({
 }) {
 
   const uploadImages = async (files: File[]) => {
-    for (const file of files) {
-      console.log(file.name);
+  for (const file of files) {
+    const fileName = `${Date.now()}-${Math.random()}-${file.name}`;
+
+    // Upload image to Storage
+    const { error } = await supabase.storage
+      .from("product-images")
+      .upload(fileName, file);
+
+    if (error) {
+      toast.error(error.message);
+      continue;
     }
-  };
+
+    // Get public URL
+    const { data } = supabase.storage
+      .from("product-images")
+      .getPublicUrl(fileName);
+
+    // Save URL in database
+    const { error: dbError } = await supabase
+      .from("product_images")
+      .insert({
+        product_id: product.id,
+        image_url: data.publicUrl,
+      });
+
+    if (dbError) {
+      toast.error(dbError.message);
+      continue;
+    }
+  }
+
+  toast.success("Images uploaded successfully");
+};
 
   return (
     <Dialog>

@@ -81,13 +81,22 @@ const fetchImages = async () => {
   setLoading(false);
 };
   
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button size="sm" variant="secondary">
-          Images
-        </Button>
-      </DialogTrigger>
+ return (
+  <Dialog
+    open={open}
+    onOpenChange={(value) => {
+      setOpen(value);
+
+      if (value) {
+        fetchImages();
+      }
+    }}
+  >
+    <DialogTrigger asChild>
+      <Button size="sm" variant="secondary">
+        Images
+      </Button>
+    </DialogTrigger>
 
       <DialogContent className="max-w-2xl">
         <DialogHeader>

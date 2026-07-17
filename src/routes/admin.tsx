@@ -225,11 +225,10 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   <Label>Product Image</Label>
   <Input
   type="file"
-  multiple
   accept="image/*"
   onChange={(e) => {
-    const files = e.target.files;
-    if (files) uploadImages(Array.from(files));
+    const file = e.target.files?.[0];
+    if (file) uploadImage(file);
   }}
 />
 </div>

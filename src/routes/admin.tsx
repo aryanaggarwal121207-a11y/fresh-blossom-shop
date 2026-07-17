@@ -227,7 +227,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   type="file"
   multiple
   accept="image/*"
-/>
+
   accept="image/*"
   onChange={(e) => {
     const file = e.target.files?.[0];

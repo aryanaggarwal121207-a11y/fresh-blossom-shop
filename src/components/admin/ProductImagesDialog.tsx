@@ -38,23 +38,27 @@ export function ProductImagesDialog({
 
         <div className="space-y-4">
           <div className="space-y-3">
- <input
-  type="file"
-  multiple
-  accept="image/*"
-  onClick={() => {
-    alert("Input clicked");
-  }}
-  onChange={(e) => {
-    alert("Files selected");
-
-    const files = e.target.files;
-    if (!files) return;
-
-    console.log(files);
-    console.log(Array.from(files));
-  }}
-/>
+<div className="space-y-3">
+  <label
+    style={{
+      display: "inline-block",
+      padding: "10px 20px",
+      background: "#2563eb",
+      color: "white",
+      borderRadius: "8px",
+      cursor: "pointer",
+    }}
+  >
+    Choose Images
+    <input
+      type="file"
+      multiple
+      accept="image/*"
+      style={{ display: "none" }}
+      onChange={() => alert("Files selected")}
+    />
+  </label>
+</div>
 </div>
           <div className="rounded-lg border p-8 text-center text-muted-foreground">
             No images uploaded yet.

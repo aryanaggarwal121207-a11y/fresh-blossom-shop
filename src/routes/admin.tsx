@@ -154,7 +154,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   description: product?.description ?? "",
 });
 
-  const save = async () => 
+
     const uploadImage = async (file: File) => {
   const fileName = `${Date.now()}-${file.name}`;
 
@@ -178,7 +178,8 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
 
   toast.success("Image uploaded");
 };
-  {
+  const save = async () => {
+  
     const payload = {
       name: form.name,
       slug: form.slug || form.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),

@@ -9,14 +9,22 @@ import {
 import type { Product } from "@/lib/types";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 type ProductImagesDialogProps = {
   product: Product;
 };
 
+type ProductImage = {
+  id: string;
+  image_url: string;
+};
 export function ProductImagesDialog({
   product,
 }: ProductImagesDialogProps) {
+  const [open, setOpen] = useState(false);
+const [images, setImages] = useState<ProductImage[]>([]);
+const [loading, setLoading] = useState(false);
   const uploadImages = async (files: File[]) => {
     for (const file of files) {
       const fileName = `${Date.now()}-${Math.random()}-${file.name}`;

@@ -68,39 +68,40 @@ export function ProductImagesDialog({
         </DialogHeader>
 
         <div className="space-y-4">
-          <div className="space-y-3">
-  <label
-    style={{
-      display: "inline-block",
-      padding: "10px 20px",
-      background: "#2563eb",
-      color: "white",
-      borderRadius: "8px",
-      cursor: "pointer",
-    }}
-  >
-    Choose Images
-<input
-  type="file"
-  multiple
-  accept="image/*"
-  style={{ border: "1px solid black", padding: "10px" }}
-  onChange={(e) => {
-    const files = e.target.files;
-    if (!files) return;
+  <div className="space-y-3">
+    <label
+      style={{
+        display: "inline-block",
+        padding: "10px 20px",
+        background: "#2563eb",
+        color: "white",
+        borderRadius: "8px",
+        cursor: "pointer",
+      }}
+    >
+      Choose Images
 
-    alert(`Selected ${files.length} files`);
+      <input
+        type="file"
+        multiple
+        accept="image/*"
+        style={{ border: "1px solid black", padding: "10px" }}
+        onChange={(e) => {
+          const files = e.target.files;
+          if (!files) return;
 
-    uploadImages(Array.from(files));
-  }}
-/>
-  </label>
+          alert(`Selected ${files.length} files`);
+
+          uploadImages(Array.from(files));
+        }}
+      />
+    </label>
+  </div>
+
+  <div className="rounded-lg border p-8 text-center text-muted-foreground">
+    No images uploaded yet.
+  </div>
 </div>
-</div>
-          <div className="rounded-lg border p-8 text-center text-muted-foreground">
-            No images uploaded yet.
-          </div>
-        </div>
       </DialogContent>
     </Dialog>
   );

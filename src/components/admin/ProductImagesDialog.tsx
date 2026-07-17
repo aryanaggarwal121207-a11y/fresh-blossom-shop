@@ -83,6 +83,7 @@ export function ProductImagesDialog({
   >
     Choose Images
 <input
+ <input
   type="file"
   multiple
   accept="image/*"
@@ -94,15 +95,6 @@ export function ProductImagesDialog({
     alert(`Selected ${files.length} files`);
 
     uploadImages(Array.from(files));
-  }}
-/>
-  
-
-    console.log(files.length);
-
-    Array.from(files).forEach((file) => {
-      console.log(file.name);
-    });
   }}
 />
   </label>

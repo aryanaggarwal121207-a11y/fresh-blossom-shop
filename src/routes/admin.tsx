@@ -129,8 +129,9 @@ function Admin() {
           {s}
         </SelectItem>
       ))}
-    </SelectContent>
+        </SelectContent>
   </Select>
+</div>
 </div>
               ))}
             </div>

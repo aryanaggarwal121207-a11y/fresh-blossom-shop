@@ -1,0 +1,41 @@
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import type { Product } from "@/lib/types";
+
+export function ProductImagesDialog({
+  product,
+}: {
+  product: Product;
+}) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="sm" variant="secondary">
+          Images
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>
+            Manage Images - {product.name}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-4">
+          <Button>Upload Images</Button>
+
+          <div className="rounded-lg border p-8 text-center text-muted-foreground">
+            No images uploaded yet.
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

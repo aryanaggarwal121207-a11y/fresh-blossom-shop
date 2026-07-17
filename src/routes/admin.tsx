@@ -211,8 +211,27 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
             <div className="space-y-1.5"><Label>Discount %</Label><Input type="number" value={form.discount_percent} onChange={(e) => setForm({ ...form, discount_percent: e.target.value })} /></div>
             <div className="space-y-1.5"><Label>Stock</Label><Input type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} /></div>
           </div>
-          <div className="space-y-1.5"><Label>Description</Label><Input value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} /></div>
-          <Button onClick={save}>Save</Button>
+          <div className="space-y-1.5">
+  <Label>Description</Label>
+  <Input
+    value={form.description}
+    onChange={(e) => setForm({ ...form, description: e.target.value })}
+  />
+</div>
+
+<div className="space-y-1.5">
+  <Label>Product Image</Label>
+  <Input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (file) uploadImage(file);
+    }}
+  />
+</div>
+
+<Button onClick={save}>Save</Button>
         </div>
       </DialogContent>
     </Dialog>

@@ -21,9 +21,13 @@ export interface ProductFilters {
 export async function fetchProducts(filters: ProductFilters = {}): Promise<Product[]> {
 let query = supabase
   .from("products")
-  .select("*")
+  .select(`
+    *,
+    product_images (
+      image_url
+    )
+  `)
   .eq("is_active", true);
-
   if (filters.featured) query = query.eq("is_featured", true);
   if (filters.bestSeller) query = query.eq("is_best_seller", true);
   if (filters.newArrival) query = query.eq("is_new_arrival", true);
@@ -56,7 +60,10 @@ console.log("Supabase error:", error);
   if (error) throw error;
   let rows = (data ?? []) as unknown as (Product & { categories?: { slug: string } })[];
   if (filters.categorySlug) rows = rows.filter((p) => p.categories?.slug === filters.categorySlug);
-  return rows;
+  return rows.map((product: any) => ({
+  ...product,
+  image_url: product.product_images?.[0]?.image_url ?? product.image_url,
+}));
 }
 
 export async function fetchProductBySlug(slug: string): Promise<Product & { categories?: Category } | null> {

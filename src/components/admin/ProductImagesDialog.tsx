@@ -32,8 +32,8 @@ export function ProductImagesDialog({
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>
-            Manage Images - {product.name}
-          </DialogTitle>
+  TEST 123 - {product.name}
+</DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">

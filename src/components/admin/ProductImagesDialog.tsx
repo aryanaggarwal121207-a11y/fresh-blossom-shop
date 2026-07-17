@@ -54,7 +54,6 @@ export function ProductImagesDialog({
 
   return (
     <Dialog>
-      ...
       <DialogTrigger asChild>
         <Button size="sm" variant="secondary">
           Images
@@ -70,7 +69,6 @@ export function ProductImagesDialog({
 
         <div className="space-y-4">
           <div className="space-y-3">
-<div className="space-y-3">
   <label
     style={{
       display: "inline-block",

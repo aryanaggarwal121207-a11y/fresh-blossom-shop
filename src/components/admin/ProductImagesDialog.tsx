@@ -42,11 +42,17 @@ export function ProductImagesDialog({
   type="file"
   multiple
   accept="image/*"
+  onClick={() => {
+    alert("Input clicked");
+  }}
   onChange={(e) => {
+    alert("Files selected");
+
     const files = e.target.files;
     if (!files) return;
 
-    uploadImages(Array.from(files));
+    console.log(files);
+    console.log(Array.from(files));
   }}
 />
 </div>

@@ -84,8 +84,21 @@ function Admin() {
               {orders.length === 0 && <p className="p-6 text-muted-foreground">No orders yet.</p>}
               {orders.map((o) => (
                 <div key={o.id} className="flex flex-wrap items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-0">
-                  <div><p className="font-medium">{o.order_number}</p><p className="text-sm text-muted-foreground">{formatDate(o.created_at)} · {formatINR(Number(o.total))}</p></div>
-                  <div className="flex items-center gap-2">
+                  <div>
+  <div className="flex items-center gap-3">
+    <p className="text-lg font-semibold">
+      {o.order_number}
+    </p>
+
+    <p className="text-base text-muted-foreground">
+      {o.customer_name}
+    </p>
+  </div>
+
+  <p className="text-sm text-muted-foreground">
+    {formatDate(o.created_at)} • {formatINR(Number(o.total))}
+  </p>
+</div>
   <Badge variant="secondary" className="capitalize">
     {o.payment_method}
   </Badge>

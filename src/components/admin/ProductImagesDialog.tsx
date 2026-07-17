@@ -13,8 +13,16 @@ export function ProductImagesDialog({
 }: {
   product: Product;
 }) {
+
+  const uploadImages = async (files: File[]) => {
+    for (const file of files) {
+      console.log(file.name);
+    }
+  };
+
   return (
     <Dialog>
+      ...
       <DialogTrigger asChild>
         <Button size="sm" variant="secondary">
           Images

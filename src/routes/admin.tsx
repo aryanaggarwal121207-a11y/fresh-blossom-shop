@@ -86,8 +86,13 @@ function Admin() {
                 <div key={o.id} className="flex flex-wrap items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-0">
                   <div><p className="font-medium">{o.order_number}</p><p className="text-sm text-muted-foreground">{formatDate(o.created_at)} · {formatINR(Number(o.total))}</p></div>
                   <div className="flex items-center gap-2">
-                    <Badge variant="secondary" className="capitalize">{o.payment_method}</Badge>
-                    <Select value={o.status} onValueChange={async (v) => { await supabase.from("orders").update({ status: v as Order["status"] }).eq("id", o.id); toast.success("Status updated"); loadOrders(); }}>
+  <Badge variant="secondary" className="capitalize">
+    {o.payment_method}
+  </Badge>
+
+  <OrderDetailsDialog order={o} />
+
+  <Select value={o.status} onValueChange={async (v) => { await supabase.from("orders").update({ status: v as Order["status"] }).eq("id", o.id); toast.success("Status updated"); loadOrders(); }}>
                       <SelectTrigger className="w-36 capitalize"><SelectValue /></SelectTrigger>
                       <SelectContent>{ORDER_STATUSES.map((s) => <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>)}</SelectContent>
                     </Select>

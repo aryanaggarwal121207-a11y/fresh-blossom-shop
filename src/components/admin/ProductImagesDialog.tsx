@@ -30,11 +30,17 @@ export function ProductImagesDialog({
 
         <div className="space-y-4">
           <div className="space-y-3">
-  <input
-    type="file"
-    multiple
-    accept="image/*"
-  />
+ <input
+  type="file"
+  multiple
+  accept="image/*"
+  onChange={(e) => {
+    const files = e.target.files;
+    if (!files) return;
+
+    uploadImages(Array.from(files));
+  }}
+/>
 </div>
           <div className="rounded-lg border p-8 text-center text-muted-foreground">
             No images uploaded yet.

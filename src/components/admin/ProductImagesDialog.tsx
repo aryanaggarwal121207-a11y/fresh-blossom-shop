@@ -108,6 +108,21 @@ const deleteImage = async (image: ProductImage) => {
     toast.error(err.message);
   }
 };
+  const setCoverImage = async (image: ProductImage) => {
+  const { error } = await supabase
+    .from("products")
+    .update({
+      cover_image_url: image.image_url,
+    })
+    .eq("id", product.id);
+
+  if (error) {
+    toast.error(error.message);
+    return;
+  }
+
+  toast.success("Cover image updated");
+};
   
  return (
   <Dialog

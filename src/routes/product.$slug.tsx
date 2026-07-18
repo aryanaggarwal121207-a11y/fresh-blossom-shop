@@ -38,6 +38,7 @@ function ProductPage() {
   const { has, toggle } = useWishlist();
   const { track } = useRecentlyViewed();
   const [qty, setQty] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", slug],
@@ -84,6 +85,12 @@ function ProductPage() {
       </div>
     );
   }
+  const images =
+  product.product_images?.length
+    ? product.product_images
+    : [{ image_url: product.image_url }];
+
+const currentImage = images[selectedImage];
 
   const price = finalPrice(Number(product.price), product.discount_percent);
   const outOfStock = product.stock <= 0;
@@ -96,9 +103,65 @@ function ProductPage() {
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-3xl border border-border bg-brand-soft shadow-[var(--shadow-soft)]">
-          <img src={resolveImage(product.image_url)} alt={product.name} className="aspect-square w-full object-cover" />
-        </div>
+        <div className="space-y-4">
+  <div className="relative overflow-hidden rounded-3xl border border-border bg-brand-soft shadow-[var(--shadow-soft)]">
+
+    <img
+      src={resolveImage(currentImage.image_url)}
+      alt={product.name}
+      className="aspect-square w-full object-cover"
+    />
+
+    {images.length > 1 && (
+      <>
+        <Button
+          variant="secondary"
+          size="icon"
+          className="absolute left-3 top-1/2 -translate-y-1/2"
+          onClick={() =>
+            setSelectedImage(
+              selectedImage === 0
+                ? images.length - 1
+                : selectedImage - 1
+            )
+          }
+        >
+          ◀
+        </Button>
+
+        <Button
+          variant="secondary"
+          size="icon"
+          className="absolute right-3 top-1/2 -translate-y-1/2"
+          onClick={() =>
+            setSelectedImage(
+              selectedImage === images.length - 1
+                ? 0
+                : selectedImage + 1
+            )
+          }
+        >
+          ▶
+        </Button>
+      </>
+    )}
+  </div>
+
+  <div className="flex gap-2 overflow-x-auto">
+    {images.map((image: any, index: number) => (
+      <img
+        key={index}
+        src={resolveImage(image.image_url)}
+        onClick={() => setSelectedImage(index)}
+        className={`h-20 w-20 cursor-pointer rounded-lg border object-cover ${
+          selectedImage === index
+            ? "border-primary"
+            : "border-border"
+        }`}
+      />
+    ))}
+  </div>
+</div>
 
         <div>
           <div className="flex items-center gap-3">

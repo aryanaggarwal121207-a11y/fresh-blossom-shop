@@ -79,7 +79,7 @@ export function Header() {
         </Sheet>
 
         <Link to="/" className="flex items-center gap-2 font-display text-2xl font-semibold">
-          <Leaf className="text-primary" /> STfresh
+          <Leaf className="text-primary" /> Daksherb
         </Link>
 
         <nav className="ml-4 hidden items-center gap-1 lg:flex">

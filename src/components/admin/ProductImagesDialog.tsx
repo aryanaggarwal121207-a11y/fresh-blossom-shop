@@ -170,27 +170,36 @@ const deleteImage = async (image: ProductImage) => {
     </div>
   )}
 
-  {images.map((image) => (
-    <div
-  key={image.id}
-  className="relative overflow-hidden rounded-lg border"
->
-  <img
-    src={image.image_url}
-    alt="Product"
-    className="w-full h-40 object-cover"
-  />
-
-  <Button
-    size="sm"
-    variant="destructive"
-    className="absolute right-2 top-2"
-    onClick={() => deleteImage(image)}
+ {images.map((image) => (
+  <div
+    key={image.id}
+    className="relative overflow-hidden rounded-lg border"
   >
-    Delete
-  </Button>
-</div>
-  ))}
+    <img
+      src={image.image_url}
+      alt="Product"
+      className="w-full h-40 object-cover"
+    />
+
+    <div className="absolute top-2 right-2 flex gap-2">
+      <Button
+        size="sm"
+        variant="secondary"
+        onClick={() => setCoverImage(image)}
+      >
+        ⭐ Cover
+      </Button>
+
+      <Button
+        size="sm"
+        variant="destructive"
+        onClick={() => deleteImage(image)}
+      >
+        Delete
+      </Button>
+    </div>
+  </div>
+))}
 </div>
         </div>
       </DialogContent>

@@ -84,13 +84,16 @@ export async function fetchProductBySlug(slug: string): Promise<any> {
 
   return data;
 }
-  if (error) throw error;
-  return data as unknown as (Product & { categories?: Category }) | null;
-}
 
 export async function fetchProductsByIds(ids: string[]): Promise<Product[]> {
   if (!ids.length) return [];
-  const { data, error } = await supabase.from("products").select("*").in("id", ids);
+
+  const { data, error } = await supabase
+    .from("products")
+    .select("*")
+    .in("id", ids);
+
   if (error) throw error;
+
   return data ?? [];
 }

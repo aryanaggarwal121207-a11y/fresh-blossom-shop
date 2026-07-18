@@ -85,7 +85,13 @@ export async function fetchProductBySlug(slug: string): Promise<any> {
 
   if (error) throw error;
 
-  return data;
+  return {
+  ...data,
+  image_url:
+    data?.cover_image_url ??
+    data?.product_images?.[0]?.image_url ??
+    data?.image_url,
+};
 }
 
 export async function fetchProductsByIds(ids: string[]): Promise<Product[]> {

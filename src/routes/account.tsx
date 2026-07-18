@@ -12,7 +12,7 @@ import type { Address } from "@/lib/types";
 
 export const Route = createFileRoute("/account")({
   component: () => <RequireAuth><Account /></RequireAuth>,
-  head: () => ({ meta: [{ title: "My Account — STfresh" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "My Account — Daksherb" }, { name: "robots", content: "noindex" }] }),
 });
 
 function Account() {

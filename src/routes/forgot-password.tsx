@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/forgot-password")({
   component: ForgotPage,
-  head: () => ({ meta: [{ title: "Reset password — STfresh" }] }),
+  head: () => ({ meta: [{ title: "Reset password — Daksherb" }] }),
 });
 
 function ForgotPage() {

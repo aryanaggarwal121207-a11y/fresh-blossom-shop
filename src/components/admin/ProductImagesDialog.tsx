@@ -80,6 +80,34 @@ const fetchImages = async () => {
 
   setLoading(false);
 };
+const deleteImage = async (image: ProductImage) => {
+  if (!confirm("Delete this image?")) return;
+
+  try {
+    // Remove database record
+    const { error: dbError } = await supabase
+      .from("product_images")
+      .delete()
+      .eq("id", image.id);
+
+    if (dbError) throw dbError;
+
+    // Remove file from Storage (best effort)
+    const path = image.image_url.split("/product-images/")[1];
+
+    if (path) {
+      await supabase.storage
+        .from("product-images")
+        .remove([decodeURIComponent(path)]);
+    }
+
+    toast.success("Image deleted");
+
+    fetchImages();
+  } catch (err: any) {
+    toast.error(err.message);
+  }
+};
   
  return (
   <Dialog
@@ -129,15 +157,24 @@ const fetchImages = async () => {
 
   {images.map((image) => (
     <div
-      key={image.id}
-      className="overflow-hidden rounded-lg border"
-    >
-      <img
-        src={image.image_url}
-        alt="Product"
-        className="w-full h-40 object-cover"
-      />
-    </div>
+  key={image.id}
+  className="relative overflow-hidden rounded-lg border"
+>
+  <img
+    src={image.image_url}
+    alt="Product"
+    className="w-full h-40 object-cover"
+  />
+
+  <Button
+    size="sm"
+    variant="destructive"
+    className="absolute right-2 top-2"
+    onClick={() => deleteImage(image)}
+  >
+    Delete
+  </Button>
+</div>
   ))}
 </div>
         </div>

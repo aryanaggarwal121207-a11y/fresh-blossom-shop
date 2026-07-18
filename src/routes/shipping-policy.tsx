@@ -10,5 +10,5 @@ export const Route = createFileRoute("/shipping-policy")({
       { h: "Serviceable areas", p: "We currently ship across India. Delivery to remote locations may take slightly longer." },
     ]} />
   ),
-  head: () => ({ meta: [{ title: "Shipping Policy — STfresh" }, { property: "og:url", content: "/shipping-policy" }], links: [{ rel: "canonical", href: "/shipping-policy" }] }),
+  head: () => ({ meta: [{ title: "Shipping Policy — Daksherb" }, { property: "og:url", content: "/shipping-policy" }], links: [{ rel: "canonical", href: "/shipping-policy" }] }),
 });

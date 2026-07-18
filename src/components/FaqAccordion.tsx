@@ -6,7 +6,7 @@ export const FAQ_ITEMS = [
   { q: "How long does delivery take?", a: "Standard delivery takes 4–6 business days, while express delivery arrives in 1–2 business days. Free shipping on orders above ₹499." },
   { q: "What is your return policy?", a: "Unfortunately there is no return policy for now. See our Return Policy page for details." },
   { q: "Which payment methods do you accept?", a: "We accept UPI, credit/debit cards, net banking, wallets and Cash on Delivery." },
-  { q: "Are STfresh products cruelty-free?", a: "Yes — we never test on animals and are proudly cruelty-free." },
+  { q: "Are Daksherb products cruelty-free?", a: "Yes — we never test on animals and are proudly cruelty-free." },
 ];
 
 export function FaqAccordion({ items = FAQ_ITEMS }: { items?: { q: string; a: string }[] }) {

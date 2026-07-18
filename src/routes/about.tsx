@@ -8,8 +8,8 @@ export const Route = createFileRoute("/about")({
   component: About,
   head: () => ({
     meta: [
-      { title: "About STfresh — Our Natural Skincare Story" },
-      { name: "description", content: "STfresh crafts natural, plant-powered skincare with rose, aloe vera and papaya for healthy, glowing skin." },
+      { title: "About Daksherb — Our Natural Skincare Story" },
+      { name: "description", content: "Daksherb crafts natural, plant-powered skincare with rose, aloe vera and papaya for healthy, glowing skin." },
       { property: "og:url", content: "/about" },
     ],
     links: [{ rel: "canonical", href: "/about" }],
@@ -24,7 +24,7 @@ function About() {
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-brand-soft px-4 py-1.5 text-sm font-medium text-primary"><Leaf size={15} /> Our story</span>
             <h1 className="mt-5 font-display text-4xl font-semibold md:text-5xl">Nature-first skincare, made with love</h1>
-            <p className="mt-5 text-lg text-muted-foreground">STfresh was born from a simple belief: skincare should be pure, gentle and rooted in nature. We craft every product with plant-powered ingredients like rose, aloe vera and papaya — free from harsh chemicals.</p>
+            <p className="mt-5 text-lg text-muted-foreground">Daksherb was born from a simple belief: skincare should be pure, gentle and rooted in nature. We craft every product with plant-powered ingredients like rose, aloe vera and papaya — free from harsh chemicals.</p>
             <Button asChild className="mt-6"><Link to="/shop">Explore products</Link></Button>
           </div>
           <img src={heroImg} alt="STfresh natural skincare" className="rounded-3xl border border-border object-cover shadow-[var(--shadow-card)]" />

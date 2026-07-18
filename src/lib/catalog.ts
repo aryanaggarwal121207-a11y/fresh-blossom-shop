@@ -60,9 +60,12 @@ console.log("Supabase error:", error);
   if (error) throw error;
   let rows = (data ?? []) as unknown as (Product & { categories?: { slug: string } })[];
   if (filters.categorySlug) rows = rows.filter((p) => p.categories?.slug === filters.categorySlug);
-  return rows.map((product: any) => ({
+ return rows.map((product: any) => ({
   ...product,
-  image_url: product.product_images?.[0]?.image_url ?? product.image_url,
+  image_url:
+    product.cover_image_url ??
+    product.product_images?.[0]?.image_url ??
+    product.image_url,
 }));
 }
 

@@ -66,12 +66,24 @@ console.log("Supabase error:", error);
 }));
 }
 
-export async function fetchProductBySlug(slug: string): Promise<Product & { categories?: Category } | null> {
+export async function fetchProductBySlug(slug: string): Promise<any> {
   const { data, error } = await supabase
     .from("products")
-    .select("*, categories(*)")
+    .select(`
+      *,
+      categories(*),
+      product_images (
+        id,
+        image_url
+      )
+    `)
     .eq("slug", slug)
     .maybeSingle();
+
+  if (error) throw error;
+
+  return data;
+}
   if (error) throw error;
   return data as unknown as (Product & { categories?: Category }) | null;
 }

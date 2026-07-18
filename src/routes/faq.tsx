@@ -5,7 +5,7 @@ export const Route = createFileRoute("/faq")({
   component: Faq,
   head: () => ({
     meta: [
-      { title: "FAQ — STfresh" },
+      { title: "FAQ — Daksherb" },
       { name: "description", content: "Answers to common questions about Daksherb natural skincare, shipping, returns and payments." },
       { property: "og:url", content: "/faq" },
     ],

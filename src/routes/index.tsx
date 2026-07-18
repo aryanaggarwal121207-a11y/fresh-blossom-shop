@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Store",
-          name: "STfresh",
+          name: "Daksherb",
           description: "Natural skincare — rose face wash, aloe vera gel and papaya gel.",
         }),
       },

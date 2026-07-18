@@ -85,11 +85,19 @@ function ProductPage() {
       </div>
     );
   }
-  const images =
-  product.product_images?.length
-    ? product.product_images
-    : [{ image_url: product.image_url }];
+ const images = [
+  ...(product.cover_image_url
+    ? [{ image_url: product.cover_image_url }]
+    : []),
 
+  ...(product.product_images ?? []).filter(
+    (img: any) => img.image_url !== product.cover_image_url
+  ),
+];
+
+if (images.length === 0) {
+  images.push({ image_url: product.image_url });
+}
 const currentImage = images[selectedImage];
 
   const price = finalPrice(Number(product.price), product.discount_percent);

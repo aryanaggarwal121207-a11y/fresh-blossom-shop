@@ -28,7 +28,7 @@ export function Footer() {
       <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2">
           <Link to="/" className="flex items-center gap-2 font-display text-2xl font-semibold text-sidebar-foreground">
-            <Leaf className="text-sidebar-primary" /> STfresh
+            <Leaf className="text-sidebar-primary" /> Daksherb
           </Link>
           <p className="mt-4 max-w-xs text-sm text-sidebar-foreground/70">
             Natural, plant-powered skincare crafted with rose, aloe vera and papaya — for healthy, glowing skin.

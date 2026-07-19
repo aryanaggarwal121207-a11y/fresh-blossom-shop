@@ -14,6 +14,7 @@ export interface CartItem {
   slug: string;
   name: string;
   price: number;
+  short_description: string | null;
   discountPercent: number;
   image: string | null;
   quantity: number;

@@ -166,6 +166,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   price: product?.price?.toString() ?? "",
   discount_percent: product?.discount_percent?.toString() ?? "0",
   stock: product?.stock?.toString() ?? "0",
+  short_description: product?.short_description ?? "",
   description: product?.description ?? "",
     badge: product?.badge ?? "",
 });
@@ -203,6 +204,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
       price: Number(form.price),
       discount_percent: Number(form.discount_percent),
       stock: Number(form.stock),
+      short_description: form.short_description,
       description: form.description,
       badge: form.badge === "none" ? null : form.badge,
     };

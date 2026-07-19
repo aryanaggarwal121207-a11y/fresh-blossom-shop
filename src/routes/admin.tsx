@@ -15,6 +15,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import type { Order, Product } from "@/lib/types";
+import { Textarea } from "@/components/ui/textarea";
 
 export const Route = createFileRoute("/admin")({
   component: () => <RequireAuth admin><Admin /></RequireAuth>,
@@ -231,10 +232,12 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
           </div>
           <div className="space-y-1.5">
   <Label>Description</Label>
-  <Input
-    value={form.description}
-    onChange={(e) => setForm({ ...form, description: e.target.value })}
-  />
+<Textarea
+  value={form.description}
+  onChange={(e) => setForm({ ...form, description: e.target.value })}
+  rows={6}
+  placeholder="Enter product description..."
+/>
 </div>
 <div className="space-y-1.5">
   <Label>Badge</Label>

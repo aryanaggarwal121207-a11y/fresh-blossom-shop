@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Heart, Minus, Plus, ShoppingBag, Truck, ShieldCheck, RefreshCcw } from "lucide-react";
+import { Sparkles, Leaf } from "lucide-react";
 import { fetchProductBySlug, fetchProducts } from "@/lib/catalog";
 import { supabase } from "@/integrations/supabase/client";
 import { finalPrice, type Review } from "@/lib/types";
@@ -220,8 +221,8 @@ const currentImage = images[selectedImage];
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {[
               { icon: Truck, t: "Free shipping", d: "Over ₹499" },
-              { icon: ShieldCheck, t: "100% Natural", d: "No parabens" },
-              { icon: RefreshCcw, t: "Easy returns", d: "Within 7 days" },
+             { icon: Leaf, t: "Natural Ingredients", d: "Suitable for everyday use" },
+              { icon: Sparkles, t: "Brightens Skin", d: "For a natural healthy glow" },
             ].map((f) => (
               <div key={f.t} className="flex items-center gap-2 rounded-xl border border-border bg-card p-3">
                 <f.icon size={20} className="text-primary" />

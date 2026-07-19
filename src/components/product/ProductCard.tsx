@@ -37,8 +37,27 @@ export function ProductCard({ product }: { product: Product }) {
             {product.discount_percent > 0 && (
               <Badge className="bg-destructive text-destructive-foreground">-{product.discount_percent}%</Badge>
             )}
-            {product.is_new_arrival && <Badge variant="secondary">New</Badge>}
-            {product.is_best_seller && <Badge className="bg-gold text-brand-dark">Best Seller</Badge>}
+           {product.badge && (
+  <Badge
+    className={
+      product.badge === "Bestseller"
+        ? "bg-yellow-500 text-white"
+        : product.badge === "New"
+        ? "bg-green-600 text-white"
+        : product.badge === "Trending"
+        ? "bg-purple-600 text-white"
+        : product.badge === "Sale"
+        ? "bg-red-600 text-white"
+        : product.badge === "Limited Stock"
+        ? "bg-orange-600 text-white"
+        : product.badge === "Organic"
+        ? "bg-emerald-600 text-white"
+        : ""
+    }
+  >
+    {product.badge}
+  </Badge>
+)}
           </div>
           <button
             aria-label="Add to wishlist"

@@ -69,10 +69,17 @@ function Index() {
               ))}
             </div>
           </div>
-          <div className="relative">
-          <section className="relative overflow-hidden bg-[image:var(--gradient-hero)]">
-            </div>
-          </div>
+<div className="relative">
+  <div className="animate-float overflow-hidden rounded-[2rem] border border-border shadow-[var(--shadow-card)]">
+    <img
+      src={heroImg}
+      alt="Woman applying natural aloe vera skincare gel"
+      width={1600}
+      height={1200}
+      className="h-full w-full object-cover"
+    />
+  </div>
+</div>
         </div>
       </section>
 

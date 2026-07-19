@@ -235,13 +235,13 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
           </div>
          <div className="space-y-1.5">
   <Label>Short Description</Label>
-  <Input
-    value={form.short_description}
-    onChange={(e) =>
-      setForm({ ...form, short_description: e.target.value })
-    }
-    placeholder="100% Natural Aloe Vera Gel"
-  />
+  <Textarea
+  rows={4}
+  value={form.short_description}
+  onChange={(e) =>
+    setForm({ ...form, short_description: e.target.value })
+  }
+/>
 </div>
           <div className="space-y-1.5">
   <Label>Description</Label>

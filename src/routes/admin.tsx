@@ -208,6 +208,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
       description: form.description,
       badge: form.badge === "none" ? null : form.badge,
     };
+    console.log("Payload:", payload);
     const { error } = product
       ? await supabase.from("products").update(payload).eq("id", product.id)
       : await supabase.from("products").insert(payload);

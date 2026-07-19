@@ -17,7 +17,7 @@ export interface CartItem {
   discountPercent: number;
   image: string | null;
   quantity: number;
-  stock: number;
+  badge: string | null;
 }
 
 export function finalPrice(price: number, discountPercent: number): number {

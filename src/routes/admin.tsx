@@ -230,6 +230,16 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
             <div className="space-y-1.5"><Label>Discount %</Label><Input type="number" value={form.discount_percent} onChange={(e) => setForm({ ...form, discount_percent: e.target.value })} /></div>
             <div className="space-y-1.5"><Label>Stock</Label><Input type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} /></div>
           </div>
+         <div className="space-y-1.5">
+  <Label>Short Description</Label>
+  <Input
+    value={form.short_description}
+    onChange={(e) =>
+      setForm({ ...form, short_description: e.target.value })
+    }
+    placeholder="100% Natural Aloe Vera Gel"
+  />
+</div>
           <div className="space-y-1.5">
   <Label>Description</Label>
 <Textarea

@@ -180,11 +180,6 @@ const currentImage = images[selectedImage];
   {product.name}
 </h1>
 
-{product.short_description && (
-  <p className="mt-2 text-base text-muted-foreground">
-    {product.short_description}
-  </p>
-)}
           <div className="mt-4 flex items-center gap-3">
             <span className="text-3xl font-semibold">{formatINR(price)}</span>
             {product.discount_percent > 0 && (

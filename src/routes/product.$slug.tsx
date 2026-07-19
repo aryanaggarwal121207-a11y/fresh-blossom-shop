@@ -190,8 +190,8 @@ const currentImage = images[selectedImage];
               </>
             )}
           </div>
-          {product.short_description && (
-  <p className="mt-2 text-base text-muted-foreground">
+{product.short_description && (
+  <p className="mt-2 whitespace-pre-line text-base text-muted-foreground">
     {product.short_description}
   </p>
 )}

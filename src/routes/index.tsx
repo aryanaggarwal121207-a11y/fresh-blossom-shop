@@ -70,11 +70,7 @@ function Index() {
             </div>
           </div>
           <div className="relative">
-           <div className="animate-float overflow-hidden rounded-[40px] shadow-2xl">
-             <img
-    src={heroImg}
-    className="h-full w-full object-cover transition duration-700 hover:scale-105"
-/>
+          <section className="relative overflow-hidden bg-[image:var(--gradient-hero)]">
             </div>
           </div>
         </div>

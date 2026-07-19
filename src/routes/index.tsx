@@ -57,7 +57,7 @@ function Index() {
               </Button>
             </div>
             <div className="mt-10 flex gap-8">
-              //{[
+              {[
                 //{ n: "50k+", l: "Happy customers" },
                 //{ n: "4.8★", l: "Average rating" },
                 //{ n: "100%", l: "Natural" },

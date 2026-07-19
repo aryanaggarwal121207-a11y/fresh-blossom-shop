@@ -12,7 +12,7 @@ export function WhyChoose() {
     <section className="bg-brand-soft/60 py-16">
       <div className="container-page">
         <div className="mb-10 text-center">
-          <span className="text-sm font-semibold uppercase tracking-wider text-primary">Why STfresh</span>
+          <span className="text-sm font-semibold uppercase tracking-wider text-primary">Why Daksherb</span>
           <h2 className="mt-1 font-display text-3xl font-semibold md:text-4xl">Skincare you can trust</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

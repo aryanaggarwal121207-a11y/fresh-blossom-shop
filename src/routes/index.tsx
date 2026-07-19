@@ -70,8 +70,11 @@ function Index() {
             </div>
           </div>
           <div className="relative">
-            <div className="animate-float overflow-hidden rounded-[2rem] border border-border shadow-[var(--shadow-card)]">
-              <img src={heroImg} alt="Woman applying natural aloe vera skincare gel" width={1600} height={1200} className="h-full w-full object-cover" />
+           <div className="animate-float overflow-hidden rounded-[40px] shadow-2xl">
+             <img
+    src={heroImg}
+    className="h-full w-full object-cover transition duration-700 hover:scale-105"
+/>
             </div>
           </div>
         </div>

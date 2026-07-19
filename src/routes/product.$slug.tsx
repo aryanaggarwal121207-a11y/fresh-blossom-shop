@@ -220,7 +220,7 @@ const currentImage = images[selectedImage];
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {[
-              { icon: Truck, t: "Free shipping", d: "Over ₹499" },
+             { icon: Heart, t: "Healthy Skin", d: "Nourishes and revitalizes skin" },
              { icon: Leaf, t: "Natural Ingredients", d: "Suitable for everyday use" },
               { icon: Sparkles, t: "Brightens Skin", d: "For a natural healthy glow" },
             ].map((f) => (

@@ -86,12 +86,18 @@ export function ProductCard({ product }: { product: Product }) {
             <span className="text-xs text-muted-foreground">({product.review_count})</span>
           </div>
           <Link
-            to="/product/$slug"
-            params={{ slug: product.slug }}
-            className="line-clamp-2 font-medium leading-snug hover:text-primary"
-          >
-            {product.name}
-          </Link>
+  to="/product/$slug"
+  params={{ slug: product.slug }}
+  className="line-clamp-2 font-medium leading-snug hover:text-primary"
+>
+  {product.name}
+</Link>
+
+{product.short_description && (
+  <p className="line-clamp-2 text-sm text-muted-foreground">
+    {product.short_description}
+  </p>
+)}
           <div className="mt-auto flex items-center gap-2 pt-1">
             <span className="text-lg font-semibold text-foreground">{formatINR(price)}</span>
             {product.discount_percent > 0 && (

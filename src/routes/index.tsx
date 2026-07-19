@@ -57,10 +57,10 @@ function Index() {
               </Button>
             </div>
             <div className="mt-10 flex gap-8">
-              {[
-                { n: "50k+", l: "Happy customers" },
-                { n: "4.8★", l: "Average rating" },
-                { n: "100%", l: "Natural" },
+              //{[
+                //{ n: "50k+", l: "Happy customers" },
+                //{ n: "4.8★", l: "Average rating" },
+                //{ n: "100%", l: "Natural" },
               ].map((s) => (
                 <div key={s.l}>
                   <p className="font-display text-2xl font-semibold text-primary">{s.n}</p>
@@ -106,10 +106,13 @@ function Index() {
           <div>
             <span className="text-sm font-semibold uppercase tracking-wider text-primary">Help center</span>
             <h2 className="mt-1 font-display text-3xl font-semibold md:text-4xl">Frequently asked questions</h2>
-            <p className="mt-3 text-muted-foreground">Everything you need to know about STfresh products, shipping and returns.</p>
-            <Button asChild variant="outline" className="mt-6">
-              <Link to="/faq">View all FAQs</Link>
-            </Button>
+            <p className="mt-3 text-muted-foreground">Everything you need to know about Daksherb products, shipping and returns.</p>
+            <Button
+  asChild
+  className="mt-6 rounded-full bg-[#2E5D50] px-8 py-6 text-white hover:bg-[#23463d]"
+>
+  <Link to="/faq">Learn more</Link>
+</Button>
           </div>
           <FaqAccordion items={undefined} />
         </div>

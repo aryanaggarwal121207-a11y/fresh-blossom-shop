@@ -36,7 +36,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-lg">
       <div className="bg-[image:var(--gradient-brand)] py-2 text-center text-xs font-medium text-primary-foreground">
-        Free shipping on orders above ₹499 · Natural skincare, delivered fresh 🌿
+        Free shipping on orders above ₹499 · Natural skincare, delivered at you doorstep
       </div>
       <div className="container-page flex h-16 items-center gap-4">
         <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>

@@ -3,7 +3,7 @@ import { Leaf, ShieldCheck, Truck, Sparkles } from "lucide-react";
 const items = [
   { icon: Leaf, title: "100% Natural", desc: "Plant-powered formulas with no harsh chemicals or parabens." },
   { icon: ShieldCheck, title: "Dermatologically Safe", desc: "Gentle on all skin types, cruelty-free and tested." },
-  { icon: Truck, title: "Fast Delivery", desc: "Free shipping over ₹499 with quick, tracked dispatch." },
+  { icon: Truck, title: "Fast Delivery", desc: "Free shipping over ₹499 with quick shipping." },
   { icon: Sparkles, title: "Visible Results", desc: "Real ingredients that hydrate, brighten and nourish." },
 ];
 

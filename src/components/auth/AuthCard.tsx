@@ -9,7 +9,7 @@ export function AuthCard({ title, subtitle, children }: { title: string; subtitl
     <div className="container-page flex min-h-[80vh] items-center justify-center py-12">
       <div className="w-full max-w-md rounded-3xl border border-border bg-card p-8 shadow-[var(--shadow-card)]">
         <Link to="/" className="mb-6 flex items-center justify-center gap-2 font-display text-2xl font-semibold">
-          <Leaf className="text-primary" /> STfresh
+          <Leaf className="text-primary" /> Daksherb
         </Link>
         <h1 className="text-center font-display text-2xl font-semibold">{title}</h1>
         <p className="mt-1 text-center text-sm text-muted-foreground">{subtitle}</p>

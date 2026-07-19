@@ -10,7 +10,7 @@ import { Separator } from "@/components/ui/separator";
 
 export const Route = createFileRoute("/login")({
   component: LoginPage,
-  head: () => ({ meta: [{ title: "Login — STfresh" }] }),
+  head: () => ({ meta: [{ title: "Login — Daksherb" }] }),
 });
 
 function LoginPage() {
@@ -33,7 +33,7 @@ function LoginPage() {
   };
 
   return (
-    <AuthCard title="Welcome back" subtitle="Log in to your STfresh account">
+    <AuthCard title="Welcome back" subtitle="Log in to your Daksherb account">
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-1.5">
           <Label htmlFor="email">Email</Label>
@@ -51,7 +51,7 @@ function LoginPage() {
       <div className="my-4 flex items-center gap-3"><Separator className="flex-1" /><span className="text-xs text-muted-foreground">OR</span><Separator className="flex-1" /></div>
       <GoogleButton />
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        New to STfresh? <Link to="/signup" className="font-medium text-primary hover:underline">Create an account</Link>
+        New to Daksherb? <Link to="/signup" className="font-medium text-primary hover:underline">Create an account</Link>
       </p>
     </AuthCard>
   );

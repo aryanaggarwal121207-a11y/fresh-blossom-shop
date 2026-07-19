@@ -327,6 +327,7 @@ export type Database = {
           slug: string
           stock: number
           updated_at: string
+          short_description: string | null
         }
         Insert: {
           category_id?: string | null
@@ -347,6 +348,7 @@ export type Database = {
           slug: string
           stock?: number
           updated_at?: string
+          short_description: string | null
         }
         Update: {
           category_id?: string | null

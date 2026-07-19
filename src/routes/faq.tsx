@@ -25,7 +25,7 @@ function Faq() {
   return (
     <div className="container-page max-w-3xl py-12">
       <h1 className="font-display text-4xl font-semibold">Frequently asked questions</h1>
-      <p className="mt-2 text-muted-foreground">Everything you need to know about STfresh.</p>
+      <p className="mt-2 text-muted-foreground">Everything you need to know about Daksherb.</p>
       <div className="mt-8"><FaqAccordion /></div>
     </div>
   );

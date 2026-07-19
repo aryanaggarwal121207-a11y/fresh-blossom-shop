@@ -30,7 +30,13 @@ function Index() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden bg-[image:var(--gradient-hero)]">
+     <section
+  className="relative overflow-hidden"
+  style={{
+    background:
+      "linear-gradient(180deg,#FAF7F2 0%,#F5EFE6 45%,#FAF7F2 100%)",
+  }}
+>
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-brand-soft px-4 py-1.5 text-sm font-medium text-primary">

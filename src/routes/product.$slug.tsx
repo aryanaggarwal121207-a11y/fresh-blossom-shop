@@ -176,7 +176,15 @@ const currentImage = images[selectedImage];
             <StarRating value={Number(product.rating)} size={16} />
             <span className="text-sm text-muted-foreground">{Number(product.rating)} ({product.review_count} reviews)</span>
           </div>
-          <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">{product.name}</h1>
+          <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">
+  {product.name}
+</h1>
+
+{product.short_description && (
+  <p className="mt-2 text-base text-muted-foreground">
+    {product.short_description}
+  </p>
+)}
           <div className="mt-4 flex items-center gap-3">
             <span className="text-3xl font-semibold">{formatINR(price)}</span>
             {product.discount_percent > 0 && (
@@ -186,13 +194,19 @@ const currentImage = images[selectedImage];
               </>
             )}
           </div>
-          <p className="mt-5 text-muted-foreground">{product.description}</p>
+          {product.short_description && (
+  <p className="mt-2 text-base text-muted-foreground">
+    {product.short_description}
+  </p>
+)}
 
-          <div className="mt-4">
-            <span className={cn("text-sm font-medium", outOfStock ? "text-destructive" : "text-success")}>
-              {outOfStock ? "Out of stock" : `In stock (${product.stock} available)`}
-            </span>
-          </div>
+         {outOfStock && (
+  <div className="mt-4">
+    <span className="text-sm font-medium text-destructive">
+      Out of stock
+    </span>
+  </div>
+)}
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <div className="flex items-center rounded-full border border-border">

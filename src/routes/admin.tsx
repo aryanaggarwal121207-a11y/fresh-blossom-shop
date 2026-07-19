@@ -166,6 +166,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
   discount_percent: product?.discount_percent?.toString() ?? "0",
   stock: product?.stock?.toString() ?? "0",
   description: product?.description ?? "",
+    badge: product?.badge ?? "",
 });
 
 
@@ -202,6 +203,7 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
       discount_percent: Number(form.discount_percent),
       stock: Number(form.stock),
       description: form.description,
+      badge: form.badge === "none" ? null : form.badge,
     };
     const { error } = product
       ? await supabase.from("products").update(payload).eq("id", product.id)
@@ -234,7 +236,34 @@ function ProductDialog({ product, onSaved }: { product?: Product; onSaved: () =>
     onChange={(e) => setForm({ ...form, description: e.target.value })}
   />
 </div>
+<div className="space-y-1.5">
+  <Label>Badge</Label>
 
+  <Select
+    value={form.badge}
+    onValueChange={(value) =>
+      setForm({
+        ...form,
+        badge: value,
+      })
+    }
+  >
+    <SelectTrigger>
+      <SelectValue placeholder="Select badge" />
+    </SelectTrigger>
+
+    <SelectContent>
+      <SelectItem value="none">None</SelectItem>
+      <SelectItem value="Bestseller">⭐ Bestseller</SelectItem>
+      <SelectItem value="New">✨ New</SelectItem>
+      <SelectItem value="Trending">🔥 Trending</SelectItem>
+      <SelectItem value="Sale">🏷️ Sale</SelectItem>
+      <SelectItem value="Limited Stock">⚡ Limited Stock</SelectItem>
+      <SelectItem value="Organic">🌿 Organic</SelectItem>
+    </SelectContent>
+  </Select>
+</div>
+          
 <div className="space-y-1.5">
   <Label>Product Image</Label>
   <Input

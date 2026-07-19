@@ -18,5 +18,5 @@ export const Route = createFileRoute("/return-policy")({
   },
 ]} />
   ),
-  head: () => ({ meta: [{ title: "Return Policy — STfresh" }, { property: "og:url", content: "/return-policy" }], links: [{ rel: "canonical", href: "/return-policy" }] }),
+  head: () => ({ meta: [{ title: "Return Policy — Daksherb" }, { property: "og:url", content: "/return-policy" }], links: [{ rel: "canonical", href: "/return-policy" }] }),
 });

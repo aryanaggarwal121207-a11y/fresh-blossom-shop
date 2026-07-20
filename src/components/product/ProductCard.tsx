@@ -94,9 +94,9 @@ export function ProductCard({ product }: { product: Product }) {
 </Link>
 
 {product.short_description && (
- <p className="mt-2 whitespace-pre-line text-base text-muted-foreground">
-  {product.short_description}
-</p>
+  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground leading-5">
+    {product.short_description}
+  </p>
 )}
 
           <div className="mt-auto flex items-center gap-2 pt-1">

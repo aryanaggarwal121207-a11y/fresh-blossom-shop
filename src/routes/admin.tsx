@@ -93,7 +93,7 @@ function Admin() {
                 </div>
               ))}
             </div>
-          </TabsContent>
+        
 
           <TabsContent value="orders" className="pt-6">
              <TabsContent value="products" className="pt-6">
@@ -117,7 +117,7 @@ function Admin() {
     </SelectContent>
   </Select>
 </div>
-               
+             
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               {orders.length === 0 && <p className="p-6 text-muted-foreground">No orders yet.</p>}
              {orders

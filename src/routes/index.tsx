@@ -71,8 +71,13 @@ function Index() {
               ))}
             </div>
           </div>
-<div className="relative">
-  <div className="animate-float overflow-hidden rounded-[2rem] border border-border shadow-[var(--shadow-card)]">
+<div className="relative flex justify-center">
+  {/* Soft Glow */}
+  <div className="absolute inset-0 flex items-center justify-center">
+    <div className="h-80 w-80 rounded-full bg-pink-200/30 blur-3xl"></div>
+  </div>
+
+  <div className="relative animate-float overflow-hidden rounded-[2rem] border border-border shadow-[var(--shadow-card)]">
     <img
       src={heroImg}
       alt="Woman applying natural aloe vera skincare gel"

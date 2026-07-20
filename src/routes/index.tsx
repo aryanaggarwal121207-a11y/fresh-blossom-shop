@@ -8,7 +8,6 @@ import { CategoriesSection } from "@/components/home/CategoriesSection";
 import { WhyChoose } from "@/components/home/WhyChoose";
 import { Reviews } from "@/components/home/Reviews";
 import { FaqAccordion } from "@/components/FaqAccordion";
-import { FloatingBubbles } from "@/components/home/FloatingBubbles";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -38,7 +37,6 @@ function Index() {
       "linear-gradient(180deg,#FAF7F2 0%,#F5EFE6 45%,#FAF7F2 100%)",
   }}
 >
-       <FloatingBubbles />
         <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-brand-soft px-4 py-1.5 text-sm font-medium text-primary">

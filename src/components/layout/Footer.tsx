@@ -75,7 +75,7 @@ export function Footer() {
       </div>
       <div className="border-t border-sidebar-border">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-5 text-xs text-sidebar-foreground/60 sm:flex-row">
-          <p>© {new Date().getFullYear()} STfresh. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Daksherb. All rights reserved.</p>
           <p>Made with 🌿 for healthy skin.</p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Leaf } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
+import aboutImg from "@/assets/about-daksherb.png";
 import { Button } from "@/components/ui/button";
 import { WhyChoose } from "@/components/home/WhyChoose";
 
@@ -27,7 +27,7 @@ function About() {
             <p className="mt-5 text-lg text-muted-foreground">Daksherb was born from a simple belief: skincare should be pure, gentle and rooted in nature. We craft every product with plant-powered ingredients like rose, aloe vera and papaya — free from harsh chemicals.</p>
             <Button asChild className="mt-6"><Link to="/shop">Explore products</Link></Button>
           </div>
-          <img src={heroImg} alt="Daksherb natural skincare" className="rounded-3xl border border-border object-cover shadow-[var(--shadow-card)]" />
+         <img src={aboutImg} alt="About Daksherb" className="rounded-3xl border border-border object-cover shadow-[var(--shadow-card)] />
         </div>
       </section>
       <WhyChoose />

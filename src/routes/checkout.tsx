@@ -18,7 +18,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 export const Route = createFileRoute("/checkout")({
   component: () => <RequireAuth><Checkout /></RequireAuth>,
-  head: () => ({ meta: [{ title: "Checkout — STfresh" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Checkout — Daksherb" }, { name: "robots", content: "noindex" }] }),
 });
 
 function Checkout() {
@@ -33,7 +33,7 @@ function Checkout() {
   const [placing, setPlacing] = useState(false);
 
   const deliveryFee = DELIVERY_OPTIONS.find((d) => d.value === delivery)?.fee ?? 0;
-  const baseShipping = subtotal >= 499 ? 0 : 49;
+  const baseShipping = subtotal >= 499 ? 0 : 100;
   const shipping = baseShipping + deliveryFee;
   const total = Math.max(0, subtotal - discount) + shipping;
 

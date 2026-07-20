@@ -8,6 +8,7 @@ import { CategoriesSection } from "@/components/home/CategoriesSection";
 import { WhyChoose } from "@/components/home/WhyChoose";
 import { Reviews } from "@/components/home/Reviews";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { FloatingBubbles } from "@/components/home/FloatingBubbles";
 
 export const Route = createFileRoute("/")({
   component: Index,

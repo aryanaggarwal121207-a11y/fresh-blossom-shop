@@ -101,10 +101,19 @@ function Orders() {
       </Badge>
 
       {o.tracking_number && (
-        <span className="text-xs text-muted-foreground">
-          Tracking: {o.tracking_number}
-        </span>
-      )}
+  <Button
+    variant="outline"
+    size="sm"
+    onClick={() =>
+      window.open(
+        `https://gharsoaps.clickpost.ai/en?waybill=${o.tracking_number}`,
+        "_blank"
+      )
+    }
+  >
+    Track Order
+  </Button>
+)}
     </div>
   </div>
 

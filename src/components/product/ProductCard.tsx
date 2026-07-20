@@ -34,9 +34,11 @@ export function ProductCard({ product }: { product: Product }) {
             />
           </Link>
           <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-            {product.discount_percent > 0 && (
-              <Badge className="bg-destructive text-destructive-foreground">-{product.discount_percent}%</Badge>
-            )}
+           {product.show_discount && product.discount_percent > 0 && (
+  <Badge className="bg-destructive text-destructive-foreground">
+    -{product.discount_percent}%
+  </Badge>
+)}
            {product.badge && (
   <Badge
     className={

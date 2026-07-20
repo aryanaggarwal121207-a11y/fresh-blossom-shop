@@ -96,7 +96,7 @@ function Admin() {
         
 
           <TabsContent value="orders" className="pt-6">
-             <TabsContent value="products" className="pt-6">
+             
             <div className="mb-4 flex justify-end">
   <Select value={statusFilter} onValueChange={setStatusFilter}>
     <SelectTrigger className="w-52">

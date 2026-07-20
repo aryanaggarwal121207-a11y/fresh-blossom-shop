@@ -97,15 +97,8 @@ function Index() {
       <WhyChoose />
 
      
-      <section className="container-page py-16">
-  <SectionHeader
-    eyebrow="Our Collection"
-    title="Explore Our Products"
-    subtitle="Discover our complete range of natural skincare essentials, crafted to nourish and care for your skin."
-    linkTo="/shop"
-  />
-  <QueryProductGrid filters={{}} />
-</section>
+      
+
 
       <Reviews />
 

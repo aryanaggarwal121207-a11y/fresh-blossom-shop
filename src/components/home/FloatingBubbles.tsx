@@ -16,14 +16,15 @@ export function FloatingBubbles() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden">
       {bubbles.map((bubble) => (
-        <div
+        <span
           key={bubble.id}
-          className="absolute rounded-full bg-red-500"
+          className="absolute bottom-0 rounded-full bubble"
           style={{
             width: bubble.size,
             height: bubble.size,
             left: `${bubble.left}%`,
-            bottom: "0px",
+            animationDuration: `${bubble.duration}s`,
+            animationDelay: `${bubble.delay}s`,
           }}
         />
       ))}

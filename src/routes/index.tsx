@@ -85,22 +85,25 @@ function Index() {
 
       <CategoriesSection />
 
-      <section className="container-page pb-16">
-        <SectionHeader eyebrow="Featured" title="Featured products" subtitle="Our most-loved skincare essentials." linkTo="/shop" />
-        <QueryProductGrid filters={{ featured: true }} limit={4} />
-      </section>
+     <SectionHeader
+  eyebrow="Our Collection"
+  title="Explore Our Products"
+  subtitle="Discover our complete range of natural skincare essentials, crafted with nature's finest ingredients."
+  linkTo="/shop"
+/>
 
       <WhyChoose />
 
+     
       <section className="container-page py-16">
-        <SectionHeader eyebrow="Trending" title="Best sellers" subtitle="Tried, tested and adored by our community." linkTo="/shop" />
-        <QueryProductGrid filters={{ bestSeller: true }} limit={4} />
-      </section>
-
-      <section className="container-page pb-16">
-        <SectionHeader eyebrow="Just in" title="New arrivals" subtitle="Fresh additions to the STfresh range." linkTo="/shop" />
-        <QueryProductGrid filters={{ newArrival: true }} limit={4} />
-      </section>
+  <SectionHeader
+    eyebrow="Our Collection"
+    title="Explore Our Products"
+    subtitle="Discover our complete range of natural skincare essentials, crafted to nourish and care for your skin."
+    linkTo="/shop"
+  />
+  <QueryProductGrid filters={{}} />
+</section>
 
       <Reviews />
 

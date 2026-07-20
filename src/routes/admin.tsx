@@ -65,6 +65,7 @@ function Admin() {
             <TabsTrigger value="products">Products</TabsTrigger>
             <TabsTrigger value="orders">Orders</TabsTrigger>
           </TabsList>
+           <TabsContent value="products" className="pt-6">
 
          
             <div className="mb-4 flex justify-end"><ProductDialog onSaved={loadProducts} /></div>

@@ -94,7 +94,7 @@ function Admin() {
                 </div>
               ))}
             </div>
-        
+        </TabsContent>
 
           <TabsContent value="orders" className="pt-6">
              

@@ -66,27 +66,7 @@ function Admin() {
             <TabsTrigger value="orders">Orders</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="products" className="pt-6">
-            <div className="mb-4 flex justify-end">
-  <Select value={statusFilter} onValueChange={setStatusFilter}>
-    <SelectTrigger className="w-52">
-      <SelectValue placeholder="Filter by status" />
-    </SelectTrigger>
-
-    <SelectContent>
-      <SelectItem value="all">All Orders</SelectItem>
-      {ORDER_STATUSES.map((status) => (
-        <SelectItem
-          key={status}
-          value={status}
-          className="capitalize"
-        >
-          {status}
-        </SelectItem>
-      ))}
-    </SelectContent>
-  </Select>
-</div>
+         
             <div className="mb-4 flex justify-end"><ProductDialog onSaved={loadProducts} /></div>
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               {products.map((p) => (
@@ -116,6 +96,28 @@ function Admin() {
           </TabsContent>
 
           <TabsContent value="orders" className="pt-6">
+             <TabsContent value="products" className="pt-6">
+            <div className="mb-4 flex justify-end">
+  <Select value={statusFilter} onValueChange={setStatusFilter}>
+    <SelectTrigger className="w-52">
+      <SelectValue placeholder="Filter by status" />
+    </SelectTrigger>
+
+    <SelectContent>
+      <SelectItem value="all">All Orders</SelectItem>
+      {ORDER_STATUSES.map((status) => (
+        <SelectItem
+          key={status}
+          value={status}
+          className="capitalize"
+        >
+          {status}
+        </SelectItem>
+      ))}
+    </SelectContent>
+  </Select>
+</div>
+               
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               {orders.length === 0 && <p className="p-6 text-muted-foreground">No orders yet.</p>}
              {orders

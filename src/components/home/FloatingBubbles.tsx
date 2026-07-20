@@ -13,9 +13,20 @@ export function FloatingBubbles() {
     []
   );
 
- return (
-  <div className="absolute inset-0 z-50 bg-red-500/20">
-    TEST
-  </div>
-);
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {bubbles.map((bubble) => (
+        <div
+          key={bubble.id}
+          className="absolute rounded-full bg-red-500"
+          style={{
+            width: bubble.size,
+            height: bubble.size,
+            left: `${bubble.left}%`,
+            bottom: "0px",
+          }}
+        />
+      ))}
+    </div>
+  );
 }

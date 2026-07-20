@@ -27,6 +27,7 @@ const ORDER_STATUSES = ["pending", "confirmed", "processing", "shipped", "delive
 function Admin() {
   const [products, setProducts] = useState<Product[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const loadProducts = () => supabase.from("products").select("*").order("created_at", { ascending: false }).then(({ data }) => setProducts(data ?? []));
   const loadOrders = () => supabase.from("orders").select("*").order("created_at", { ascending: false }).then(({ data }) => setOrders(data ?? []));
@@ -66,6 +67,26 @@ function Admin() {
           </TabsList>
 
           <TabsContent value="products" className="pt-6">
+            <div className="mb-4 flex justify-end">
+  <Select value={statusFilter} onValueChange={setStatusFilter}>
+    <SelectTrigger className="w-52">
+      <SelectValue placeholder="Filter by status" />
+    </SelectTrigger>
+
+    <SelectContent>
+      <SelectItem value="all">All Orders</SelectItem>
+      {ORDER_STATUSES.map((status) => (
+        <SelectItem
+          key={status}
+          value={status}
+          className="capitalize"
+        >
+          {status}
+        </SelectItem>
+      ))}
+    </SelectContent>
+  </Select>
+</div>
             <div className="mb-4 flex justify-end"><ProductDialog onSaved={loadProducts} /></div>
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               {products.map((p) => (
@@ -97,7 +118,9 @@ function Admin() {
           <TabsContent value="orders" className="pt-6">
             <div className="overflow-hidden rounded-2xl border border-border bg-card">
               {orders.length === 0 && <p className="p-6 text-muted-foreground">No orders yet.</p>}
-              {orders.map((o) => (
+             {orders
+  .filter((o) => statusFilter === "all" || o.status === statusFilter)
+  .map((o) => (
                 <div key={o.id} className="flex flex-wrap items-center justify-between gap-4 border-b border-border px-4 py-3 last:border-0">
                   <div>
   <div className="flex items-center gap-3">

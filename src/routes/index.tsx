@@ -84,13 +84,15 @@ function Index() {
       </section>
 
       <CategoriesSection />
-
-     <SectionHeader
-  eyebrow="Our Collection"
-  title="Explore Our Products"
-  subtitle="Discover our complete range of natural skincare essentials, crafted with nature's finest ingredients."
-  linkTo="/shop"
-/>
+<section className="container-page py-16">
+  <SectionHeader
+    eyebrow="Our Collection"
+    title="Explore Our Products"
+    subtitle="Discover our complete range of natural skincare essentials, crafted to nourish and care for your skin."
+    linkTo="/shop"
+  />
+  <QueryProductGrid filters={{}} />
+</section>
 
       <WhyChoose />
 

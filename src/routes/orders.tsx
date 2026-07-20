@@ -14,7 +14,7 @@ export const Route = createFileRoute("/orders")({
 });
 
 function Orders() {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -135,7 +135,9 @@ function Checkout() {
   required
   value={addr.phone}
   onChange={(e) => setAddr({ ...addr, phone: e.target.value })}
-/><div className="space-y-1.5 sm:col-span-2">
+/>
+ </div>
+                <div className="space-y-1.5 sm:col-span-2">
   <Label>Address line 1</Label>
   <Input
     required

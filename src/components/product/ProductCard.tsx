@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Heart, ShoppingBag, Eye } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { finalPrice } from "@/lib/types";
@@ -16,6 +16,7 @@ import { QuickViewDialog } from "@/components/product/QuickViewDialog";
 export function ProductCard({ product }: { product: Product }) {
  const { addItem, items } = useCart();
   const { has, toggle } = useWishlist();
+ const navigate = useNavigate();
   const [quickOpen, setQuickOpen] = useState(false);
   const [adding, setAdding] = useState(false);
 const [added, setAdded] = useState(false);
@@ -85,7 +86,7 @@ useEffect(() => {
   disabled={outOfStock || adding}
   onClick={() => {
     if (inCart) {
-      window.location.href = "/cart";
+      navigate({ to: "/cart" });
       return;
     }
 

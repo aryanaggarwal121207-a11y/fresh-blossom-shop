@@ -124,6 +124,13 @@ if (!paymentResult.success) {
   toast.error("Payment cancelled");
   return;
 }
+    await supabase
+  .from("orders")
+  .update({
+    payment_status: "paid",
+  })
+  .eq("id", order.id);
+    
     setPlacing(false);
     clear();
     toast.success("Order placed successfully!");

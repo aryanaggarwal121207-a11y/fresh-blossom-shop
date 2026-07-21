@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Heart, Minus, Plus, ShoppingBag, Truck, ShieldCheck, RefreshCcw } from "lucide-react";
 import { Sparkles, Leaf } from "lucide-react";
@@ -35,11 +35,20 @@ export const Route = createFileRoute("/product/$slug")({
 
 function ProductPage() {
   const { slug } = Route.useParams();
-  const { addItem } = useCart();
+ const { addItem, items } = useCart();
+const navigate = useNavigate();
   const { has, toggle } = useWishlist();
   const { track } = useRecentlyViewed();
   const [qty, setQty] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [adding, setAdding] = useState(false);
+const [added, setAdded] = useState(false);
+
+const inCart = items.some((item) => item.productId === product.id);
+
+useEffect(() => {
+  if (inCart) setAdded(true);
+}, [inCart]);
 
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", slug],
@@ -212,10 +221,35 @@ const currentImage = images[selectedImage];
             </div>
             <Button size="lg" className="flex-1 min-w-[180px]" disabled={outOfStock} onClick={() => addItem(product, qty)}>
               <ShoppingBag size={18} /> Add to cart
-            </Button>
-            <Button size="lg" variant="outline" aria-label="Wishlist" onClick={() => toggle(product.id)}>
-              <Heart size={18} className={cn(has(product.id) && "fill-destructive text-destructive")} />
-            </Button>
+           <Button
+  size="lg"
+  className="flex-1 min-w-[180px]"
+  disabled={outOfStock}
+  onClick={() => {
+    if (added) {
+      navigate({ to: "/cart" });
+      return;
+    }
+
+    setAdding(true);
+    addItem(product, qty);
+
+    setTimeout(() => {
+      setAdding(false);
+      setAdded(true);
+    }, 500);
+  }}
+>
+  {adding ? (
+    "Adding..."
+  ) : added ? (
+    "✓ View Cart"
+  ) : (
+    <>
+      <ShoppingBag size={18} /> Add to cart
+    </>
+  )}
+</Button>
           </div>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3">

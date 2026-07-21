@@ -44,7 +44,7 @@ const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
 const [added, setAdded] = useState(false);
 
-const inCart = items.some((item) => item.productId === product.id);
+const inCart = items.some((item) => item.productId === product?.id);
 
 useEffect(() => {
   if (inCart) setAdded(true);

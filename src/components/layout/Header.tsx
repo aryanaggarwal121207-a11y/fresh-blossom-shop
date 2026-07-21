@@ -48,7 +48,7 @@ export function Header() {
           <SheetContent side="left" className="w-80">
             <SheetHeader>
               <SheetTitle className="flex items-center gap-2 font-display text-xl">
-                <Leaf className="text-primary" /> STfresh
+                <Leaf className="text-primary" /> Daksherb
               </SheetTitle>
             </SheetHeader>
             <nav className="mt-6 flex flex-col gap-1">

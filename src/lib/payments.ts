@@ -67,6 +67,7 @@ async function loadRazorpay() {
   name: "razorpay",
 
   async pay(input) {
+    console.log("PAY FUNCTION STARTED");
     console.log("1. pay() called", input);
 
     const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;

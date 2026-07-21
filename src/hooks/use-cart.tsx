@@ -63,7 +63,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         },
       ];
     });
-    toast.success(`${product.name} added to cart`);
+    //toast.success(`${product.name} added to cart`);
   };
 
   const removeItem = (productId: string) =>

@@ -169,24 +169,41 @@ if (!paymentResult.success) {
   value={addr.line2}
   onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
 /></div>
-                <div className="space-y-1.5"><Label>Pincode</Label><Input
-  required
-  value={addr.pincode}
-  onChange={(e) => {
-    const pincode = e.target.value.replace(/\D/g, "").slice(0, 6);
+               <div className="space-y-1.5">
+  <Label>Pincode</Label>
+  <Input
+    required
+    value={addr.pincode}
+    onChange={(e) => {
+      const pincode = e.target.value.replace(/\D/g, "").slice(0, 6);
 
-    setAddr((prev) => ({
-      ...prev,
-      pincode,
-    }));
-              <div className="space-y-1.5"><Label>City</Label><Input
-  value={addr.city}
-  readOnly
-/></div>
-              <div className="space-y-1.5"><Label>State</Label><Input
-  value={addr.state}
-  readOnly
-/></div>
+      setAddr((prev) => ({
+        ...prev,
+        pincode,
+      }));
+
+      if (pincode.length === 6) {
+        fetchPincodeDetails(pincode);
+      }
+    }}
+  />
+</div>
+
+<div className="space-y-1.5">
+  <Label>City</Label>
+  <Input
+    value={addr.city}
+    readOnly
+  />
+</div>
+
+<div className="space-y-1.5">
+  <Label>State</Label>
+  <Input
+    value={addr.state}
+    readOnly
+  />
+</div>
             
 
     if (pincode.length === 6) {

@@ -64,8 +64,8 @@ function Checkout() {
   const deliveryFee = DELIVERY_OPTIONS.find((d) => d.value === delivery)?.fee ?? 0;
   const baseShipping = subtotal >= 499 ? 0 : 100;
   const shipping = baseShipping + deliveryFee;
-  const total = Math.max(0, subtotal - discount) + shipping;
-
+  const codFee = payment === "cod" ? 50 : 0;
+ const total = Math.max(0, subtotal - discount) + shipping + codFee;
   const applyCoupon = async () => {
     const { data } = await supabase.from("coupons").select("*").eq("code", coupon.trim().toUpperCase()).eq("active", true).maybeSingle();
     if (!data) { toast.error("Invalid coupon"); return; }
@@ -260,6 +260,12 @@ if (!paymentResult.success) {
             <div className="flex justify-between"><span className="text-muted-foreground">Subtotal</span><span>{formatINR(subtotal)}</span></div>
             {discount > 0 && <div className="flex justify-between text-primary"><span>Discount</span><span>-{formatINR(discount)}</span></div>}
             <div className="flex justify-between"><span className="text-muted-foreground">Shipping</span><span>{shipping === 0 ? "Free" : formatINR(shipping)}</span></div>
+           {payment === "cod" && (
+  <div className="flex justify-between">
+    <span className="text-muted-foreground">Convenience Fee (COD)</span>
+    <span>{formatINR(50)}</span>
+  </div>
+)}
             <Separator />
             <div className="flex justify-between text-base font-semibold"><span>Total</span><span>{formatINR(total)}</span></div>
           </div>

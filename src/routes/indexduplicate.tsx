@@ -10,7 +10,7 @@ import { Reviews } from "@/components/home/Reviews";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { FloatingBubbles } from "@/components/home/FloatingBubbles";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/indexduplicate")({
   component: Index,
   head: () => ({
     scripts: [

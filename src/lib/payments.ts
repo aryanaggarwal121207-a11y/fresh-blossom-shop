@@ -6,6 +6,7 @@
  * wired up: set VITE_RAZORPAY_KEY_ID and add the server-side order/verify
  * endpoints. Cash on Delivery is fully handled locally.
  */
+import { supabase } from "@/integrations/supabase/client";
 export type PaymentMethod = "upi" | "card" | "netbanking" | "wallet" | "cod";
 
 export const PAYMENT_METHODS: { value: PaymentMethod; label: string; description: string }[] = [
@@ -50,22 +51,102 @@ export const codProvider: PaymentProvider = {
  * 2. Open Razorpay checkout with VITE_RAZORPAY_KEY_ID + returned order id.
  * 3. Verify the payment signature server-side before marking the order paid.
  */
+async function loadRazorpay() {
+  if ((window as any).Razorpay) return true;
+
+  return new Promise<boolean>((resolve) => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+}
+
 export const razorpayProvider: PaymentProvider = {
   name: "razorpay",
+
   async pay(input) {
     const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
+
+    const loaded = await loadRazorpay();
+
+if (!loaded) {
+  return {
+    success: false,
+    status: "failed",
+    message: "Failed to load Razorpay.",
+  };
+}
+
     if (!keyId) {
-      // Not configured yet — treat online payment as pending so the order flow still works.
       return {
-        success: true,
-        status: "pending",
-        message: "Payment gateway not configured — order recorded as pending.",
+        success: false,
+        status: "failed",
+        message: "Razorpay Key ID is missing.",
       };
     }
-    // TODO: launch Razorpay checkout here once server endpoints exist.
-    return { success: true, status: "pending", reference: `rzp_${input.orderId}` };
+
+    const { data, error } = await supabase.functions.invoke(
+      "create-razorpay-order",
+      {
+        body: {
+          amount: Math.round(input.amount * 100), // paise
+        },
+      }
+    );
+
+    if (error) {
+      return {
+        success: false,
+        status: "failed",
+        message: error.message,
+      };
+    }
+
+    return new Promise((resolve) => {
+      const options = {
+        key: keyId,
+        amount: data.amount,
+        currency: data.currency,
+        name: "Dak's Herb",
+        description: "Order Payment",
+        order_id: data.id,
+
+        handler: function (response: any) {
+          resolve({
+            success: true,
+            status: "paid",
+            reference: response.razorpay_payment_id,
+          });
+        },
+
+        modal: {
+          ondismiss: function () {
+            resolve({
+              success: false,
+              status: "failed",
+              message: "Payment cancelled.",
+            });
+          },
+        },
+
+        prefill: {
+          name: input.customerName ?? "",
+          email: input.customerEmail ?? "",
+        },
+
+        theme: {
+          color: "#f472b6",
+        },
+      };
+
+      const razorpay = new (window as any).Razorpay(options);
+      razorpay.open();
+    });
   },
 };
+  
 
 export function getPaymentProvider(method: PaymentMethod): PaymentProvider {
   return method === "cod" ? codProvider : razorpayProvider;

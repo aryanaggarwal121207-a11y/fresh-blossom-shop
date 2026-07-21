@@ -25,7 +25,7 @@ export function NewsletterForm() {
       toast.error("Something went wrong. Please try again.");
       return;
     }
-    toast.success("Subscribed! Welcome to STfresh 🌿");
+    toast.success("Subscribed! Welcome to Daksherb 🌿");
     setEmail("");
   };
 

@@ -113,10 +113,12 @@ function Checkout() {
   method: payment,
 });
 if (!paymentResult.success) {
-  await supabase
+  const { error: deleteError } = await supabase
     .from("orders")
     .delete()
     .eq("id", order.id);
+
+  console.log("Delete error:", deleteError);;
 
   setPlacing(false);
   toast.error("Payment cancelled");

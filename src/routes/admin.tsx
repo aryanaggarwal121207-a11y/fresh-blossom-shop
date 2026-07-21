@@ -30,7 +30,13 @@ function Admin() {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const loadProducts = () => supabase.from("products").select("*").order("created_at", { ascending: false }).then(({ data }) => setProducts(data ?? []));
-  const loadOrders = () => supabase.from("orders").select("*").order("created_at", { ascending: false }).then(({ data }) => setOrders(data ?? []));
+const loadOrders = () =>
+  supabase
+    .from("orders")
+    .select("*")
+    .or("payment_status.eq.paid,payment_method.eq.cod")
+    .order("created_at", { ascending: false })
+    .then(({ data }) => setOrders(data ?? []));
 
   useEffect(() => { loadProducts(); loadOrders(); }, []);
 

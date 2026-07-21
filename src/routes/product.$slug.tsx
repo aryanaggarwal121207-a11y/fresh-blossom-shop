@@ -115,7 +115,7 @@ const currentImage = images[selectedImage];
   const relatedProducts = related.filter((p) => p.id !== product.id).slice(0, 4);
 
   return (
-    <div className="container-page py-10">
+  <div className="container-page py-10 pb-28 md:pb-10">
       <nav className="mb-6 text-sm text-muted-foreground">
         <Link to="/" className="hover:text-primary">Home</Link> / <Link to="/shop" className="hover:text-primary">Shop</Link> / <span className="text-foreground">{product.name}</span>
       </nav>
@@ -302,6 +302,30 @@ const currentImage = images[selectedImage];
           <ProductGrid products={relatedProducts} />
         </section>
       )}
+    {/* Sticky Add to Cart - Mobile */}
+<div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background p-4 md:hidden">
+  <div className="mx-auto flex items-center justify-between gap-4">
+    <div>
+      <p className="text-sm font-medium">{product.name}</p>
+      <p className="font-bold text-primary">{formatINR(price)}</p>
+    </div>
+
+    <Button
+      disabled={outOfStock}
+      onClick={() => {
+        if (added) {
+          navigate({ to: "/cart" });
+          return;
+        }
+
+        addItem(product, qty);
+        setAdded(true);
+      }}
+    >
+      {added ? "✓ View Cart" : "Add to Cart"}
+    </Button>
+  </div>
+</div>
     </div>
   );
 }

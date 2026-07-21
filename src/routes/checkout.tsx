@@ -31,6 +31,35 @@ function Checkout() {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [placing, setPlacing] = useState(false);
+  const fetchPincodeDetails = async (pincode: string) => {
+  if (pincode.length !== 6) return;
+
+  try {
+    const res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+    const data = await res.json();
+
+    if (
+      data[0].Status === "Success" &&
+      data[0].PostOffice &&
+      data[0].PostOffice.length > 0
+    ) {
+      setAddr((prev) => ({
+        ...prev,
+        city: data[0].PostOffice[0].District,
+        state: data[0].PostOffice[0].State,
+      }));
+    } else {
+      toast.error("Invalid pincode");
+      setAddr((prev) => ({
+        ...prev,
+        city: "",
+        state: "",
+      }));
+    }
+  } catch {
+    toast.error("Unable to fetch pincode details");
+  }
+};
 
   const deliveryFee = DELIVERY_OPTIONS.find((d) => d.value === delivery)?.fee ?? 0;
   const baseShipping = subtotal >= 499 ? 0 : 100;
@@ -97,13 +126,52 @@ function Checkout() {
           <section className="rounded-2xl border border-border bg-card p-6">
             <h2 className="font-display text-xl font-semibold">Shipping address</h2>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5"><Label>Full name</Label><Input value={addr.full_name} onChange={(e) => setAddr({ ...addr, full_name: e.target.value })} /></div>
-              <div className="space-y-1.5"><Label>Phone</Label><Input value={addr.phone} onChange={(e) => setAddr({ ...addr, phone: e.target.value })} /></div>
-              <div className="space-y-1.5 sm:col-span-2"><Label>Address line 1</Label><Input value={addr.line1} onChange={(e) => setAddr({ ...addr, line1: e.target.value })} /></div>
-              <div className="space-y-1.5 sm:col-span-2"><Label>Address line 2</Label><Input value={addr.line2} onChange={(e) => setAddr({ ...addr, line2: e.target.value })} /></div>
-              <div className="space-y-1.5"><Label>City</Label><Input value={addr.city} onChange={(e) => setAddr({ ...addr, city: e.target.value })} /></div>
-              <div className="space-y-1.5"><Label>State</Label><Input value={addr.state} onChange={(e) => setAddr({ ...addr, state: e.target.value })} /></div>
-              <div className="space-y-1.5"><Label>Pincode</Label><Input value={addr.pincode} onChange={(e) => setAddr({ ...addr, pincode: e.target.value })} /></div>
+              <div className="space-y-1.5"><Label>Full name</Label><Input
+  required
+  value={addr.full_name}
+  onChange={(e) => setAddr({ ...addr, full_name: e.target.value })}
+/></div>
+              <div className="space-y-1.5"><Label>Phone</Label><Input
+  required
+  value={addr.phone}
+  onChange={(e) => setAddr({ ...addr, phone: e.target.value })}
+/><div className="space-y-1.5 sm:col-span-2">
+  <Label>Address line 1</Label>
+  <Input
+    required
+    value={addr.line1}
+    onChange={(e) => setAddr({ ...addr, line1: e.target.value })}
+  />
+</div>
+              <div className="space-y-1.5 sm:col-span-2"><Label>Address line 2</Label><Input
+  required
+  value={addr.line2}
+  onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
+/></div>
+              <div className="space-y-1.5"><Label>City</Label><Input
+  value={addr.city}
+  readOnly
+/></div>
+              <div className="space-y-1.5"><Label>State</Label><Input
+  value={addr.state}
+  readOnly
+/></div>
+              <div className="space-y-1.5"><Label>Pincode</Label><Input
+  required
+  value={addr.pincode}
+  onChange={(e) => {
+    const pincode = e.target.value.replace(/\D/g, "").slice(0, 6);
+
+    setAddr((prev) => ({
+      ...prev,
+      pincode,
+    }));
+
+    if (pincode.length === 6) {
+      fetchPincodeDetails(pincode);
+    }
+  }}
+/></div>
             </div>
           </section>
 

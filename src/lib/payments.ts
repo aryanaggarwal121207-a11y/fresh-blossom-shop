@@ -117,7 +117,7 @@ console.log("4. Edge Function response:", data, error);
         key: keyId,
         amount: data.amount,
         currency: data.currency,
-        name: "Dak's Herb",
+        name: "Daksherb",
         description: "Order Payment",
         order_id: data.id,
 

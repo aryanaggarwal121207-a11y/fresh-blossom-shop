@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag, Eye } from "lucide-react";
 import type { Product } from "@/lib/types";
@@ -14,9 +14,19 @@ import { useWishlist } from "@/hooks/use-wishlist";
 import { QuickViewDialog } from "@/components/product/QuickViewDialog";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart();
+ const { addItem, items } = useCart();
   const { has, toggle } = useWishlist();
   const [quickOpen, setQuickOpen] = useState(false);
+  const [adding, setAdding] = useState(false);
+const [added, setAdded] = useState(false);
+
+const inCart = items.some((item) => item.productId === product.id);
+
+useEffect(() => {
+  if (inCart) {
+    setAdded(true);
+  }
+}, [inCart]);
   const price = finalPrice(Number(product.price), product.discount_percent);
   const inWishlist = has(product.id);
   const outOfStock = product.stock <= 0;
@@ -69,14 +79,36 @@ export function ProductCard({ product }: { product: Product }) {
             <Heart size={17} className={cn(inWishlist && "fill-destructive text-destructive")} />
           </button>
           <div className="absolute inset-x-3 bottom-3 flex translate-y-3 gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            <Button
-              size="sm"
-              className="flex-1"
-              disabled={outOfStock}
-              onClick={() => addItem(product)}
-            >
-              <ShoppingBag size={15} /> Add
-            </Button>
+          <Button
+  size="sm"
+  className="flex-1"
+  disabled={outOfStock || adding}
+  onClick={() => {
+    if (inCart) {
+      window.location.href = "/cart";
+      return;
+    }
+
+    setAdding(true);
+
+    setTimeout(() => {
+      addItem(product);
+      setAdding(false);
+      setAdded(true);
+    }, 500);
+  }}
+>
+  {adding ? (
+    "Adding..."
+  ) : added ? (
+    "✓ View Cart"
+  ) : (
+    <>
+      <ShoppingBag size={15} />
+      Add
+    </>
+  )}
+</Button>
             <Button size="sm" variant="secondary" aria-label="Quick view" onClick={() => setQuickOpen(true)}>
               <Eye size={15} />
             </Button>

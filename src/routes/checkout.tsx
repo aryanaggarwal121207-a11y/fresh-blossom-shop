@@ -120,8 +120,6 @@ if (!paymentResult.success) {
     })
     .eq("id", order.id);
 
-  alert(JSON.stringify(error));
-console.log(error);
 
   setPlacing(false);
   toast.error("Payment cancelled");

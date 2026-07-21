@@ -20,7 +20,7 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
   head: () => ({
     meta: [
-      { title: "Contact Us — STfresh" },
+      { title: "Contact Us — Daksherb" },
       { name: "description", content: "Get in touch with the STfresh team. We're here to help with orders, products and skincare advice." },
       { property: "og:url", content: "/contact" },
     ],
@@ -52,8 +52,8 @@ function Contact() {
         <div className="mt-8 space-y-5">
           {[
             { icon: Mail, t: "Email", d: "hello@stfresh.com" },
-            { icon: Phone, t: "Phone", d: "+91 98765 43210" },
-            { icon: MapPin, t: "Address", d: "Bengaluru, Karnataka, India" },
+            { icon: Phone, t: "Phone", d: "+91 8448804922" },
+            { icon: MapPin, t: "Address", d: "Gurugram,India" },
           ].map((c) => (
             <div key={c.t} className="flex items-center gap-3">
               <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-soft text-primary"><c.icon size={20} /></span>

@@ -113,12 +113,14 @@ function Checkout() {
   method: payment,
 });
 if (!paymentResult.success) {
-  await supabase
+  const { error } = await supabase
     .from("orders")
     .update({
       payment_status: "cancelled",
     })
     .eq("id", order.id);
+
+  console.log("Update error:", error);
 
   setPlacing(false);
   toast.error("Payment cancelled");

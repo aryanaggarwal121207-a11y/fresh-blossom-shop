@@ -44,7 +44,7 @@ const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
 const [added, setAdded] = useState(false);
 
-const inCart = items.some((item) => item.productId === product.id);
+const inCart = items.some((item) => item.productId === product?.id);
 
 useEffect(() => {
   if (inCart) setAdded(true);
@@ -221,7 +221,7 @@ const currentImage = images[selectedImage];
             </div>
             <Button size="lg" className="flex-1 min-w-[180px]" disabled={outOfStock} onClick={() => addItem(product, qty)}>
               <ShoppingBag size={18} /> Add to cart
-           <Button
+         <Button
   size="lg"
   className="flex-1 min-w-[180px]"
   disabled={outOfStock}

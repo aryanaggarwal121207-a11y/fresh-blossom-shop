@@ -205,14 +205,7 @@ if (!paymentResult.success) {
   />
 </div>
  
-
-<div className="space-y-1.5">
-  <Label>State</Label>
-  <Input
-    value={addr.state}
-    readOnly
-  />
-</div>
+</div> 
             
          
           </section>

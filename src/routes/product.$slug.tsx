@@ -44,16 +44,16 @@ const navigate = useNavigate();
   const [adding, setAdding] = useState(false);
 const [added, setAdded] = useState(false);
 
-const inCart = items.some((item) => item.productId === product?.id);
+const { data: product, isLoading } = useQuery({
+  queryKey: ["product", slug],
+  queryFn: () => fetchProductBySlug(slug),
+});
+
+const inCart = !!product && items.some((item) => item.productId === product.id);
 
 useEffect(() => {
-  if (inCart) setAdded(true);
+  setAdded(inCart);
 }, [inCart]);
-
-  const { data: product, isLoading } = useQuery({
-    queryKey: ["product", slug],
-    queryFn: () => fetchProductBySlug(slug),
-  });
 
   const { data: related = [] } = useQuery({
     queryKey: ["related", product?.category_id],

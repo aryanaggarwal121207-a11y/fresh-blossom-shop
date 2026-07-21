@@ -82,17 +82,22 @@ function Checkout() {
       return;
     }
     setPlacing(true);
-    const { data: order, error } = await supabase.from("orders").insert({
-      user_id: user!.id,
-      subtotal,
-      discount,
-      shipping_fee: shipping,
-      total,
-      coupon_code: coupon || null,
-      payment_method: payment,
-      delivery_option: delivery,
-      shipping_address: addr,
-    }).select().single();
+    const { data: order, error } = await supabase
+  .from("orders")
+  .insert({
+    user_id: user!.id,
+    customer_name: addr.full_name,
+    subtotal,
+    discount,
+    shipping_fee: shipping,
+    total,
+    coupon_code: coupon || null,
+    payment_method: payment,
+    delivery_option: delivery,
+    shipping_address: addr,
+  })
+  .select()
+  .single();
     if (error || !order) { setPlacing(false); toast.error("Could not place order"); return; }
     await supabase.from("order_items").insert(items.map((i) => ({
       order_id: order.id,
@@ -164,15 +169,7 @@ if (!paymentResult.success) {
   value={addr.line2}
   onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
 /></div>
-              <div className="space-y-1.5"><Label>City</Label><Input
-  value={addr.city}
-  readOnly
-/></div>
-              <div className="space-y-1.5"><Label>State</Label><Input
-  value={addr.state}
-  readOnly
-/></div>
-              <div className="space-y-1.5"><Label>Pincode</Label><Input
+                <div className="space-y-1.5"><Label>Pincode</Label><Input
   required
   value={addr.pincode}
   onChange={(e) => {
@@ -182,6 +179,15 @@ if (!paymentResult.success) {
       ...prev,
       pincode,
     }));
+              <div className="space-y-1.5"><Label>City</Label><Input
+  value={addr.city}
+  readOnly
+/></div>
+              <div className="space-y-1.5"><Label>State</Label><Input
+  value={addr.state}
+  readOnly
+/></div>
+            
 
     if (pincode.length === 6) {
       fetchPincodeDetails(pincode);

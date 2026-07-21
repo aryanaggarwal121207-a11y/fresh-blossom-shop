@@ -214,13 +214,7 @@ if (!paymentResult.success) {
   />
 </div>
             
-
-    if (pincode.length === 6) {
-      fetchPincodeDetails(pincode);
-    }
-  }}
-/></div>
-            </div>
+         
           </section>
 
           <section className="rounded-2xl border border-border bg-card p-6">

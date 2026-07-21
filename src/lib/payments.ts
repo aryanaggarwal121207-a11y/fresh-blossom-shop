@@ -63,22 +63,27 @@ async function loadRazorpay() {
   });
 }
 
-export const razorpayProvider: PaymentProvider = {
+  export const razorpayProvider: PaymentProvider = {
   name: "razorpay",
 
   async pay(input) {
+    console.log("1. pay() called", input);
+
     const keyId = import.meta.env.VITE_RAZORPAY_KEY_ID;
+    console.log("2. Key ID:", keyId);
 
     const loaded = await loadRazorpay();
+    console.log("3. Razorpay SDK loaded:", loaded);
 
-if (!loaded) {
-  return {
-    success: false,
-    status: "failed",
-    message: "Failed to load Razorpay.",
-  };
-}
+    if (!loaded) {
+      return {
+        success: false,
+        status: "failed",
+        message: "Failed to load Razorpay.",
+      };
+    }
 
+    
     if (!keyId) {
       return {
         success: false,
@@ -141,6 +146,7 @@ if (!loaded) {
         },
       };
 
+      console.log("5. Opening Razorpay...");
       const razorpay = new (window as any).Razorpay(options);
       razorpay.open();
     });

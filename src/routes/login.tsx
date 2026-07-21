@@ -28,8 +28,8 @@ function LoginPage() {
       toast.error(error.message);
       return;
     }
-    toast.success("Welcome back!");
-    navigate({ to: "/account" });
+   toast.success("Welcome back!");
+navigate({ to: "/" });
   };
 
   return (

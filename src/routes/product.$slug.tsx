@@ -219,9 +219,7 @@ const currentImage = images[selectedImage];
               <span className="w-10 text-center font-medium">{qty}</span>
               <Button variant="ghost" size="icon" onClick={() => setQty((q) => Math.min(product.stock, q + 1))} aria-label="Increase"><Plus size={16} /></Button>
             </div>
-            <Button size="lg" className="flex-1 min-w-[180px]" disabled={outOfStock} onClick={() => addItem(product, qty)}>
-              <ShoppingBag size={18} /> Add to cart
-         <Button
+           <Button
   size="lg"
   className="flex-1 min-w-[180px]"
   disabled={outOfStock}

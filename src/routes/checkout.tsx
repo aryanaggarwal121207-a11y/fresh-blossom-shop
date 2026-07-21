@@ -169,7 +169,7 @@ if (!paymentResult.success) {
   value={addr.line2}
   onChange={(e) => setAddr({ ...addr, line2: e.target.value })}
 /></div>
-               <div className="space-y-1.5">
+              <div className="space-y-1.5">
   <Label>Pincode</Label>
   <Input
     required
@@ -196,6 +196,15 @@ if (!paymentResult.success) {
     readOnly
   />
 </div>
+
+<div className="space-y-1.5">
+  <Label>State</Label>
+  <Input
+    value={addr.state}
+    readOnly
+  />
+</div>
+ 
 
 <div className="space-y-1.5">
   <Label>State</Label>

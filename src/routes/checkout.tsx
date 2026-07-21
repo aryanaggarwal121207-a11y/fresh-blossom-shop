@@ -102,7 +102,21 @@ function Checkout() {
       unit_price: finalPrice(i.price, i.discountPercent),
       quantity: i.quantity,
     })));
-    await getPaymentProvider(payment).pay({ orderId: order.id, amount: total, method: payment });
+    const paymentResult = await getPaymentProvider(payment).pay({
+  orderId: order.id,
+  amount: total,
+  method: payment,
+});
+if (!paymentResult.success) {
+  await supabase
+    .from("orders")
+    .delete()
+    .eq("id", order.id);
+
+  setPlacing(false);
+  toast.error("Payment cancelled");
+  return;
+}
     setPlacing(false);
     clear();
     toast.success("Order placed successfully!");

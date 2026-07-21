@@ -101,6 +101,8 @@ async function loadRazorpay() {
       }
     );
 
+console.log("4. Edge Function response:", data, error);
+    
     if (error) {
       return {
         success: false,

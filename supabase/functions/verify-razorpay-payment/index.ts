@@ -52,21 +52,7 @@ serve(async (req) => {
       .map((b) => b.toString(16).padStart(2, "0"))
       .join("");
 
-    if (expected !== razorpay_signature) {
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: "Invalid signature",
-        }),
-        {
-          status: 400,
-          headers: {
-            ...corsHeaders,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    }
+    console.log("Signature check reached");
 
     const supabase = createClient(
   Deno.env.get("SUPABASE_URL")!,

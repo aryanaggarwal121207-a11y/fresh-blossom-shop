@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Leaf } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import type { ReactNode } from "react";
 
 export function AuthCard({ title, subtitle, children }: { title: string; subtitle: string; children: ReactNode }) {

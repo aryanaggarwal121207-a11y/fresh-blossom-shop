@@ -8,12 +8,12 @@ import { Separator } from "@/components/ui/separator";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
-  head: () => ({ meta: [{ title: "Your Cart — STfresh" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Your Cart — Daksherb" }, { name: "robots", content: "noindex" }] }),
 });
 
 function CartPage() {
   const { items, subtotal, updateQuantity, removeItem } = useCart();
-  const shipping = subtotal >= 499 || subtotal === 0 ? 0 : 49;
+  const shipping = subtotal >= 499 || subtotal === 0 ? 0 : 99;
 
   if (items.length === 0) {
     return (

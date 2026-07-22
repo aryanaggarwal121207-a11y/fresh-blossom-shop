@@ -121,13 +121,15 @@ console.log("4. Edge Function response:", data, error);
         description: "Order Payment",
         order_id: data.id,
 
-        handler: function (response: any) {
-          resolve({
-            success: true,
-            status: "paid",
-            reference: response.razorpay_payment_id,
-          });
-        },
+       handler: async function (response: any) {
+  console.log("Razorpay response:", response);
+
+  resolve({
+    success: true,
+    status: "paid",
+    reference: response.razorpay_payment_id,
+  });
+},
 
         modal: {
           ondismiss: function () {

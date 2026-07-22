@@ -124,6 +124,27 @@ console.log("4. Edge Function response:", data, error);
        handler: async function (response: any) {
   console.log("Razorpay response:", response);
 
+  const { data: verifyData, error: verifyError } =
+    await supabase.functions.invoke("verify-razorpay-payment", {
+      body: {
+        orderId: input.orderId,
+        razorpay_order_id: response.razorpay_order_id,
+        razorpay_payment_id: response.razorpay_payment_id,
+        razorpay_signature: response.razorpay_signature,
+      },
+    });
+
+  console.log("Verify response:", verifyData, verifyError);
+
+  if (verifyError || !verifyData?.success) {
+    resolve({
+      success: false,
+      status: "failed",
+      message: "Payment verification failed.",
+    });
+    return;
+  }
+
   resolve({
     success: true,
     status: "paid",

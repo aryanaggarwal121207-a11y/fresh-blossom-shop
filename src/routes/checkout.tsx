@@ -134,15 +134,15 @@ const { data: updatedOrder, error: updateError } = await supabase
   .eq("id", order.id)
   .select();
 
+console.log("ORDER ID:", order.id);
 console.log("Update result:", updatedOrder);
-console.log("Update error:", updateError);
+console.log("Update error:", JSON.stringify(updateError, null, 2));
 
-    if (updateError) {
-  console.error(updateError);
-  setPlacing(false);
-  toast.error(updateError.message);
-  return;
+if (updateError) {
+  alert(updateError.message);
 }
+
+
     
     setPlacing(false);
     clear();

@@ -33,26 +33,55 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsAdmin(!!data);
   };
 
-  useEffect(() => {
-   const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
-  setSession(s);
-  setUser(s?.user ?? null);
-  setLoading(false);
 
-  setTimeout(() => {
-    loadRole(s?.user?.id);
-  }, 0);
+     useEffect(() => {
+  const { data: sub } = supabase.auth.onAuthStateChange(async (_event, s) => {
+    setSession(s);
+    setUser(s?.user ?? null);
+    setLoading(false);
+
+    // Save customer details
+    if (s?.user) {
+      await supabase.from("customers").upsert({
+        id: s.user.id,
+        email: s.user.email,
+        phone: s.user.phone ?? null,
+        full_name:
+          s.user.user_metadata?.full_name ||
+          s.user.user_metadata?.name ||
+          null,
+        provider: s.user.app_metadata?.provider ?? "email",
+      });
+    }
+
+    setTimeout(() => {
+      loadRole(s?.user?.id);
+    }, 0);
+  });
+       supabase.auth.getSession().then(async ({ data }) => {
+  setSession(data.session);
+  setUser(data.session?.user ?? null);
+
+  if (data.session?.user) {
+    await supabase.from("customers").upsert({
+      id: data.session.user.id,
+      email: data.session.user.email,
+      phone: data.session.user.phone ?? null,
+      full_name:
+        data.session.user.user_metadata?.full_name ||
+        data.session.user.user_metadata?.name ||
+        null,
+      provider: data.session.user.app_metadata?.provider ?? "email",
+    });
+  }
+
+  loadRole(data.session?.user?.id);
+  setLoading(false);
 });
 
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setUser(data.session?.user ?? null);
-      loadRole(data.session?.user?.id);
-      setLoading(false);
-    });
+  return () => sub.subscription.unsubscribe();
+}, []);
 
-    return () => sub.subscription.unsubscribe();
-  }, []);
 
   const signOut = async () => {
     await supabase.auth.signOut();

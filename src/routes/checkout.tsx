@@ -126,12 +126,20 @@ if (!paymentResult.success) {
   return;
 }
 
-await supabase
+const { data, error } = await supabase
   .from("orders")
   .update({
     payment_status: "paid",
   })
-  .eq("id", order.id);
+  .eq("id", order.id)
+  .select();
+
+console.log("Update result:", data);
+console.log("Update error:", error);
+
+if (error) {
+  toast.error(error.message);
+}
     
     setPlacing(false);
     clear();

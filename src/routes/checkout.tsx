@@ -62,7 +62,7 @@ function Checkout() {
 };
 
   const deliveryFee = DELIVERY_OPTIONS.find((d) => d.value === delivery)?.fee ?? 0;
-  const baseShipping = subtotal >= 499 ? 0 : 100;
+  const baseShipping = subtotal >= 499 ? 0 : 99;
   const shipping = baseShipping + deliveryFee;
   const codFee = payment === "cod" ? 50 : 0;
  const total = Math.max(0, subtotal - discount) + shipping + codFee;

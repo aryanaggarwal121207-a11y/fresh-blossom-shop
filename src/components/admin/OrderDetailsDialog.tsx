@@ -48,7 +48,10 @@ export function OrderDetailsDialog({ order }: { order: Order }) {
           </h3>
 
           <div className="space-y-1 text-sm">
-            <p><strong>Name:</strong> {address?.name || "-"}</p>
+            <p>
+  <strong>Name:</strong>{" "}
+  {address?.full_name || address?.name || order.customer_name || "-"}
+</p>
             <p><strong>Phone:</strong> {address?.phone || "-"}</p>
             <p><strong>Address:</strong> {address?.line1 || "-"}</p>
 

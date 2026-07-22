@@ -126,7 +126,7 @@ if (!paymentResult.success) {
   return;
 }
 
-const { data, error } = await supabase
+const { data: updatedOrder, error: updateError } = await supabase
   .from("orders")
   .update({
     payment_status: "paid",
@@ -134,11 +134,14 @@ const { data, error } = await supabase
   .eq("id", order.id)
   .select();
 
-console.log("Update result:", data);
-console.log("Update error:", error);
+console.log("Update result:", updatedOrder);
+console.log("Update error:", updateError);
 
-if (error) {
-  toast.error(error.message);
+    if (updateError) {
+  console.error(updateError);
+  setPlacing(false);
+  toast.error(updateError.message);
+  return;
 }
     
     setPlacing(false);

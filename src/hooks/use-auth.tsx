@@ -34,12 +34,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-      // Defer supabase calls out of the callback to avoid deadlocks.
-      setTimeout(() => loadRole(s?.user?.id), 0);
-    });
+   const { data: sub } = supabase.auth.onAuthStateChange((_event, s) => {
+  setSession(s);
+  setUser(s?.user ?? null);
+  setLoading(false);
+
+  setTimeout(() => {
+    loadRole(s?.user?.id);
+  }, 0);
+});
 
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);

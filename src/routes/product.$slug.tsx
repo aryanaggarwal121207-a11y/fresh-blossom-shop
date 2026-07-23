@@ -25,7 +25,7 @@ export const Route = createFileRoute("/product/$slug")({
   component: ProductPage,
   head: ({ params }) => ({
     meta: [
-      { title: `${params.slug.replace(/-/g, " ")} — STfresh` },
+      { title: `${params.slug.replace(/-/g, " ")} — Daksherb` },
       { property: "og:type", content: "product" },
       { property: "og:url", content: `/product/${params.slug}` },
     ],
@@ -273,7 +273,7 @@ const currentImage = images[selectedImage];
         </TabsList>
         <TabsContent value="description" className="max-w-3xl pt-6 text-muted-foreground leading-relaxed">
           <p>{product.description}</p>
-          <p className="mt-4">Made with carefully sourced natural ingredients, this STfresh product is designed to nourish and protect your skin with everyday use. Free from parabens, sulphates and harsh chemicals.</p>
+          <p className="mt-4">Made with carefully sourced natural ingredients, this product is designed to nourish and protect your skin with everyday use. Free from parabens, sulphates and harsh chemicals.</p>
         </TabsContent>
         <TabsContent value="reviews" className="max-w-3xl pt-6">
           <div className="space-y-5">
